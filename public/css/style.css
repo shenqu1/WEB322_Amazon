@@ -209,7 +209,7 @@ nav>ul>li>a:focus,
 }
 
 .footer-menu {
-    margin-top: 0.7em;
+    margin-top: 0.7rem;
 }
 
 .footer-menu>ul>li {
@@ -397,6 +397,9 @@ h2 {
     color: red;
 }
 
+/******************************************************************
+                                Responsive
+*******************************************************************/
 @media(max-width: 1150px) {
 
     header {
@@ -408,6 +411,17 @@ h2 {
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 1em;
         margin: 2% 5%;
+    }
+
+    .footer-bottom {
+        grid-template-columns: 1fr 1fr;
+    }
+    .contact {
+        grid-column: 1/2;
+    }
+
+    .footer-right {
+        grid-column: 2/3;
     }
 }
 
@@ -428,7 +442,7 @@ h2 {
     .responsive {
         position: absolute;
         width: 30%;
-        height: 50vh;
+        height: 250px;
         background-color: #333;
         top: 70px;
         right: -100%;
@@ -442,17 +456,81 @@ h2 {
 
     nav ul li {
         display: block;
+        padding: 10px 10px;
     }
 
+    .footer-top {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px;
+    }
+    
+    .footer-link {
+        justify-self: start;
+
+    }
+    .footer-link-bottom {
+        padding-top: 20px;
+    }
+    
+    .footer-bottom .contact {
+        font-size: 1rem;
+    }
+    .social-icon i {
+        font-size: 1.2rem;
+    }
+    .subscribe>h2 {
+        font-size: 1.2rem;
+    }
+    .footer-menu>ul>li {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    header {
+        font-size: 0.7rem;
+    }
+    .responsive {
+        height: 200px;
+    }
+    .product-item-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
     .footer-bottom {
-        grid-template-columns: 1fr 1fr;
+        display: block;
+        text-align: center;
     }
-
-    .contact {
-        grid-column: 1/2;
-    }
-
     .footer-right {
-        grid-column: 2/3;
+        padding-top:20px;
+    }
+    .product-category {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        font-size: 0.3rem;
+    }
+    .link-head {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 320px) {
+
+    
+    #search-button {
+        height: 2rem;
+        width: 2rem;
+    }
+    #search-button i {
+        font-size: 0.7rem;
+    }
+    .product-item-container {
+        display: block;
     }
 }
