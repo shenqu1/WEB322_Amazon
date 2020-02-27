@@ -1,0 +1,15 @@
+<section class="infoForm">
+    <h1>Sign-In</h1>
+    <form class="reg-log" action="/login" method="post">
+        <label for="log-email">Email</label><br>
+        <input type="text" id="log-email" name="log-email" autocomplete="email" tabindex="1"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required placeholder="example@gmail.com"><br>
+        <label for="log-password">Password</label><br>
+        <input type="password" name="log-password" id="log-password" required tabindex="2" pattern=".{6,}"
+            placeholder="At least 6 characters"><br>
+        <p id="notice">*Passwords must consist of at least 6 characters</p>
+        <p><a href="">Need help?</a></p>
+        <input type="submit" name="submit" value="Sign In" tabindex="3"><br>
+        <p>New to Amzon? <a href="/registration">Create Your Amazon account</a></p>
+    </form>
+</section>

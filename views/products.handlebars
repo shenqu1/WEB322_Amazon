@@ -1,0 +1,15 @@
+<section class="product-list">
+    <h2>Product List: </h2>
+    <div class="product-item-container">
+        {{#each productList}}
+        <div class="product-item">
+            <img src={{this.src}} alt={{this.alt}}>
+            <p>
+                {{this.title}}<br>
+                Category: {{this.category}}<br>
+                Price: {{this.price}} <span class={{this.showBestSeller}}>&#10004;Bestseller</span>
+            </p>
+        </div>
+        {{/each}}
+    </div>
+</section>

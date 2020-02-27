@@ -1,0 +1,31 @@
+<section class="promotion">
+    <h2>Promotion: <a href="">see more deals</a></h2>
+    <div class="img-container">
+        <div class="inner-container">
+            <h1>Special Offer<br>Valentine's Day<br>50% OFF SALE</h1>
+        </div>
+    </div>
+</section>
+
+<section class="product-category">
+    {{#each categoryInfo}}
+    <div class="category-item">
+        <h2>
+            {{this.title}}
+        </h2>
+        <img src={{this.src}} alt={{this.alt}}>
+        <a href="">
+            {{this.description}}
+        </a>
+    </div>
+    {{/each}}
+</section>
+
+<section class="best-seller">
+    <h2>Best Sellers: <a href="">see more</a></h2>
+    <div class="best-seller-item">
+        {{#each bestSellerInfo}}
+        <img src={{this.src}} alt={{this.alt}}>
+        {{/each}}
+    </div>
+</section>

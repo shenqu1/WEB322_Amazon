@@ -1,0 +1,23 @@
+<section class="infoForm">
+    <h1>Create account</h1>
+    <form class="reg-log" action="/registration" method="post">
+        <label for="reg-name">Your name</label><br>
+        <input type="text" id="reg-name" name="reg-name" autocomplete="name" autofocus tabindex="1" required><br>
+        <label for="reg-email">Email</label><br>
+        <input type="text" id="reg-email" name="reg-email" autocomplete="email" tabindex="2"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required placeholder="example@gmail.com"><br>
+        <label for="reg-password">Password</label><br>
+        <input type="password" name="reg-password" id="reg-password" required tabindex="3" pattern=".{6,}"
+            placeholder="At least 6 characters"><br>
+        <p id="notice">*Passwords must consist of at least 6 characters</p>
+        <label for="password-confirm">Password again</label><br>
+        <input type="password" name="password-confirm" id="password-confirm" required tabindex="4"><br>
+        {{#each errorMessage}}
+        <p class="errors">{{this}}</p>
+        {{/each}}
+        <input type="submit" name="submit" value="Create your Amazon account" tabindex="5"><br>
+        <p>By creating an account, your agree to Amazon's <br><a href="">Conditions of Use</a> and
+            <a href="">Privacy Notice</a>.</p>
+        <p>Already have an account? <a href="/login">Sign in</a></p>
+    </form>
+</section>
