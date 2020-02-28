@@ -9,7 +9,7 @@
     box-sizing: border-box;
 }
 
-body {
+.site {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1.4rem;
     line-height: 1.7rem;
@@ -434,8 +434,9 @@ h2 {
 
 @media (max-width: 1000px) {
 
-    body {
+    .site {
         overflow-x: hidden;
+        position: relative;
     }
 
     .checkbtn {
