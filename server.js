@@ -4,6 +4,8 @@ const exphbs = require('express-handlebars');
 
 const bodyParser = require('body-parser');
 
+require('dotenv').config({path:"./config/keys.env"});
+
 const app = express();
 
 app.engine('handlebars', exphbs());
@@ -21,7 +23,7 @@ const formController = require("./controllers/form");
 app.use("/", productController);
 app.use("/form", formController);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Web Connected!`);
 });

@@ -44,7 +44,6 @@ router.post("/registration", (req, res) => {
         errors.display = true;
     }
 
-
     if (req.body["reg-password"] != req.body["password-confirm"]) {
         errors.match = `! Password doesn't match`
         errors.display = true;
@@ -52,7 +51,23 @@ router.post("/registration", (req, res) => {
     if (errors.display) {
         res.render("form/registration", errors);
     } else {
-        res.redirect("/");
+        const sgMail = require('@sendgrid/mail');
+        sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
+        const msg = {
+            to: `${req.body["reg-email"]}`,
+            from: `squ7@myseneca.ca`,
+            subject: `Registration Form Submit`,
+            html: `<h1>Welcome to Amazon!</h1>
+            <p>Congratulation! You have successfully registered with Amazon!</p>
+            <p>Visit our website <a></a></p>`
+        };
+        sgMail.send(msg)
+        .then(()=>{
+            res.send(`${msg.html}`);
+        })
+        .catch(err=>{
+            console.log(`Error ${err}`);
+        })
     }
 });
 
