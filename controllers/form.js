@@ -59,15 +59,24 @@ router.post("/registration", (req, res) => {
             subject: `Registration Form Submit`,
             html: `<h1>Welcome to Amazon!</h1>
             <p>Congratulation! You have successfully registered with Amazon!</p>
-            <p>Visit our website <a></a></p>`
+            <p>Visit our website: <a href="https://web322-amazon-project.herokuapp.com/">https://web322-amazon-project.herokuapp.com/</a></p>`
         };
         sgMail.send(msg)
-        .then(()=>{
-            res.send(`${msg.html}`);
-        })
-        .catch(err=>{
-            console.log(`Error ${err}`);
-        })
+            .then(() => {
+                const fs = require("fs");
+                fs.readFile("public/html/dashboard.html", (err, data) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.setHeader("Content-Type", "text/html");
+                        res.write(data);
+                        res.end();
+                    }
+                })
+            })
+            .catch(err => {
+                console.log(`Error ${err}`);
+            })
     }
 });
 
