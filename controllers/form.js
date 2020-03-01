@@ -12,39 +12,50 @@ router.post("/registration", (req, res) => {
         title: `Login Page`
     };
 
-    errors.nameValue = (req.body["reg-name"]).replace(/\s/g, '&nbsp;');
-    errors.emailValue = req.body["reg-email"];
-    errors.passwordValue = req.body["reg-password"];
-    errors.passwordMatch = req.body["password-confirm"];
+    errors.nameValue = req.body["reg-name"].trim().replace(/\s/g, '&nbsp;');
+    errors.emailValue = req.body["reg-email"].trim();
+    errors.passwordValue = req.body["reg-password"].trim();
+    errors.passwordMatch = req.body["password-confirm"].trim();
 
-    if (req.body["reg-name"] == "") {
+    if (errors.nameValue == "") {
         errors.name = `! Please enter your name`;
         errors.display = true;
     }
 
-    if (req.body["reg-email"] == "") {
+    if (errors.emailValue == "") {
         errors.email = `! Please enter email`;
         errors.display = true;
-    } else if (!(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(req.body["reg-email"]))) {
+    } else if (/\s/.test(errors.emailValue)) {
+        errors.email = `! Can not contain whitespace`;
+        errors.display = true;
+        errors.emailValue = errors.emailValue.replace(/\s/g, '&nbsp;');
+    } else if (!(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(errors.emailValue))) {
         errors.email = `! Invalid email format`;
         errors.display = true;
     }
 
-    if (req.body["reg-password"] == "") {
+    if (errors.passwordValue == "") {
         errors.password = `! Please enter password `;
         errors.display = true;
-    } else if (!(/^[0-9a-zA-Z]+$/.test(req.body["reg-password"])) && !(/.{6,12}/.test(req.body["reg-password"]))) {
+    } else if (/\s/.test(errors.passwordValue)) {
+        errors.password = `! Can not contain whitespace`;
+        errors.display = true;
+        errors.passwordValue = errors.passwordValue.replace(/\s/g, '&nbsp;');
+    } else if (!(/^[0-9a-zA-Z]+$/.test(errors.passwordValue)) && !(/.{6,12}/.test(errors.passwordValue))) {
         errors.password = `! Password must have 6 to 12 characters, letters and numbers only`;
         errors.display = true;
-    } else if (!(/^[0-9a-zA-Z]+$/.test(req.body["reg-password"]))) {
+    } else if (!(/^[0-9a-zA-Z]+$/.test(errors.passwordValue))) {
         errors.password = `! Password must have letters and numbers only`;
         errors.display = true;
-    } else if (!(/.{6,12}/.test(req.body["reg-password"]))) {
+    } else if (!(/.{6,12}/.test(errors.passwordValue))) {
         errors.password = `! Password must have 6 to 12 characters`;
         errors.display = true;
     }
 
-    if (req.body["reg-password"] != req.body["password-confirm"]) {
+    if (errors.passwordMatch == "") {
+        errors.match = `! Please enter password again `;
+        errors.display = true;
+    } else if (errors.passwordValue != errors.passwordMatch) {
         errors.match = `! Password doesn't match`
         errors.display = true;
     }
@@ -90,17 +101,25 @@ router.post("/login", (req, res) => {
     const errors = {
         title: `Login Page`,
     };
-    errors.emailValue = req.body["log-email"];
-    errors.passwordValue = req.body["log-password"];
+    errors.emailValue = req.body["log-email"].trim();
+    errors.passwordValue = req.body["log-password"].trim();
 
-    if (req.body["log-email"] == "") {
+    if (errors.emailValue == "") {
         errors.email = `! Please enter email`;
         errors.display = true;
+    } else if (/\s/.test(errors.emailValue)) {
+        errors.email = `! Can not contain whitespace`;
+        errors.display = true;
+        errors.emailValue = errors.emailValue.replace(/\s/g, '&nbsp;');
     }
 
-    if (req.body["log-password"] == "") {
+    if (errors.passwordValue == "") {
         errors.password = `! Please enter password`;
         errors.display = true;
+    } else if (/\s/.test(errors.passwordValue)) {
+        errors.password = `! Can not contain whitespace`;
+        errors.display = true;
+        errors.passwordValue = errors.passwordValue.replace(/\s/g, '&nbsp;');
     }
 
     if (errors.display) {
