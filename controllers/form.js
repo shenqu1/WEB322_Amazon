@@ -12,7 +12,7 @@ router.post("/registration", (req, res) => {
         title: `Login Page`
     };
 
-    errors.nameValue = req.body["reg-name"];
+    errors.nameValue = (req.body["reg-name"]).replace(/\s/g, '&nbsp;');
     errors.emailValue = req.body["reg-email"];
     errors.passwordValue = req.body["reg-password"];
     errors.passwordMatch = req.body["password-confirm"];
