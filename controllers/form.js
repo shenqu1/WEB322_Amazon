@@ -60,23 +60,23 @@ router.post("/registration", (req, res) => {
     if (errors.display) {
         res.render("form/registration", errors);
     } else {
+        const dashboard = {
+            title: "Dashboard",
+            name: errors.nameValue,
+            dash: true
+        };
         const sgMail = require('@sendgrid/mail');
         sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
         const msg = {
             to: `${req.body["reg-email"]}`,
             from: `squ7@myseneca.ca`,
             subject: `Registration Form Submit`,
-            html: `<h1>Welcome to Amazon!</h1>
+            html: `<h1>Hi ${dashboard.name}!<br> Welcome to Amazon!</h1>
             <p>Congratulation! You have successfully registered with Amazon!</p>
             <p>Visit our website: <a href="https://web322-amazon-project.herokuapp.com/">https://web322-amazon-project.herokuapp.com/</a></p>`
         };
         sgMail.send(msg)
             .then(() => {
-                const dashboard = {
-                    title: "Dashboard",
-                    name: errors.nameValue,
-                    dash: true
-                };
                 res.render("form/dashboard", dashboard);
             })
             .catch(err => {
