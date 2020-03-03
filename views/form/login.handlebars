@@ -3,14 +3,14 @@
     <form class="reg-log" action="/form/login" method="post">
         <label for="log-email">Email</label><br>
         <input type="text" {{#if this.email}} class="red-border" {{/if}} {{#if this.emailValue}}
-            value={{{this.emailValue}}} {{/if}} id="log-email" name="log-email" autocomplete="email" tabindex="1"
+            value="{{this.emailValue}}" {{/if}} id="log-email" name="log-email" autocomplete="email" tabindex="1"
             placeholder="example@gmail.com"><br>
         {{#if this.email}}
         <p class="errors">{{this.email}}</p>
         {{/if}}
         <label for="log-password">Password</label><br>
         <input type="password" {{#if this.password}} class="red-border" {{/if}} {{#if this.passwordValue}}
-            value={{{this.passwordValue}}} {{/if}} name="log-password" id="log-password" tabindex="2"><br>
+            value="{{this.passwordValue}}" {{/if}} name="log-password" id="log-password" tabindex="2"><br>
         {{#if this.password}}
         <p class="errors">{{this.password}}</p>
         {{/if}}

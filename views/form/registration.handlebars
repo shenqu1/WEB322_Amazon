@@ -2,21 +2,21 @@
     <h1>Create account</h1>
     <form class="reg-log" action="/form/registration" method="post">
         <label for="reg-name">Your name</label><br>
-        <input type="text" {{#if this.name}} class="red-border" {{/if}} {{#if this.nameValue}} value={{{this.nameValue}}}
+        <input type="text" {{#if this.name}} class="red-border" {{/if}} {{#if this.nameValue}} value="{{this.nameValue}}"
             {{/if}} id="reg-name" name="reg-name" autocomplete="name" autofocus tabindex="1"><br>
         {{#if this.name}}
         <p class="errors">{{this.name}}</p>
         {{/if}}
         <label for="reg-email">Email</label><br>
         <input type="text" {{#if this.email}} class="red-border" {{/if}} {{#if this.emailValue}}
-            value={{{this.emailValue}}} {{/if}} id="reg-email" name="reg-email" autocomplete="email" tabindex="2"
+            value="{{this.emailValue}}" {{/if}} id="reg-email" name="reg-email" autocomplete="email" tabindex="2"
             placeholder="example@gmail.com"><br>
         {{#if this.email}}
         <p class="errors">{{this.email}}</p>
         {{/if}}
         <label for="reg-password">Password</label><br>
         <input type="password" {{#if this.password}} class="red-border" {{/if}} {{#if this.passwordValue}}
-            value={{{this.passwordValue}}} {{/if}} name="reg-password" id="reg-password" tabindex="3"
+            value="{{this.passwordValue}}" {{/if}} name="reg-password" id="reg-password" tabindex="3"
             placeholder="6 - 12 characters, letters and numbers only"><br>
         <p id="notice">*Passwords must have 6 - 12 characters, letters and numbers only</p>
         {{#if this.password}}
@@ -24,7 +24,7 @@
         {{/if}}
         <label for="password-confirm">Password again</label><br>
         <input type="password" {{#if this.match}} class="red-border" {{/if}} {{#if this.passwordMatch}}
-            value={{{this.passwordMatch}}} {{/if}} name="password-confirm" id="password-confirm" tabindex="4"><br>
+            value="{{this.passwordMatch}}" {{/if}} name="password-confirm" id="password-confirm" tabindex="4"><br>
         {{#if this.match}}
         <p class="errors">{{this.match}}</p>
         {{/if}}
