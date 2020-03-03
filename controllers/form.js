@@ -9,7 +9,7 @@ router.get("/registration", (req, res) => {
 
 router.post("/registration", (req, res) => {
     const errors = {
-        title: `Login Page`
+        title: `Registration Page`
     };
 
     errors.nameValue = req.body["reg-name"].trim();
@@ -28,7 +28,6 @@ router.post("/registration", (req, res) => {
     } else if (/\s/.test(errors.emailValue)) {
         errors.email = `! Can not contain whitespace`;
         errors.display = true;
-        errors.emailValue = errors.emailValue.replace(/\s/g, '&nbsp;');
     } else if (!(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(errors.emailValue))) {
         errors.email = `! Invalid email format`;
         errors.display = true;
@@ -40,7 +39,6 @@ router.post("/registration", (req, res) => {
     } else if (/\s/.test(errors.passwordValue)) {
         errors.password = `! Can not contain whitespace`;
         errors.display = true;
-        errors.passwordValue = errors.passwordValue.replace(/\s/g, '&nbsp;');
     } else if (!(/^[0-9a-zA-Z]+$/.test(errors.passwordValue)) && !(/.{6,12}/.test(errors.passwordValue))) {
         errors.password = `! Password must have 6 to 12 characters, letters and numbers only`;
         errors.display = true;
@@ -74,16 +72,12 @@ router.post("/registration", (req, res) => {
         };
         sgMail.send(msg)
             .then(() => {
-                const fs = require("fs");
-                fs.readFile("public/html/dashboard.html", (err, data) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        res.setHeader("Content-Type", "text/html");
-                        res.write(data);
-                        res.end();
-                    }
-                })
+                const dashboard = {
+                    title: "Dashboard",
+                    name: errors.nameValue,
+                    dash: true
+                };
+                res.render("form/dashboard", dashboard);
             })
             .catch(err => {
                 console.log(`Error ${err}`);
@@ -110,7 +104,6 @@ router.post("/login", (req, res) => {
     } else if (/\s/.test(errors.emailValue)) {
         errors.email = `! Can not contain whitespace`;
         errors.display = true;
-        errors.emailValue = errors.emailValue.replace(/\s/g, '&nbsp;');
     }
 
     if (errors.passwordValue == "") {
@@ -119,7 +112,6 @@ router.post("/login", (req, res) => {
     } else if (/\s/.test(errors.passwordValue)) {
         errors.password = `! Can not contain whitespace`;
         errors.display = true;
-        errors.passwordValue = errors.passwordValue.replace(/\s/g, '&nbsp;');
     }
 
     if (errors.display) {

@@ -2,8 +2,9 @@
     <h1>Create account</h1>
     <form class="reg-log" action="/form/registration" method="post">
         <label for="reg-name">Your name</label><br>
-        <input type="text" {{#if this.name}} class="red-border" {{/if}} {{#if this.nameValue}} value="{{this.nameValue}}"
-            {{/if}} id="reg-name" name="reg-name" autocomplete="name" autofocus tabindex="1"><br>
+        <input type="text" {{#if this.name}} class="red-border" {{/if}} {{#if this.nameValue}}
+            value="{{this.nameValue}}" {{/if}} id="reg-name" name="reg-name" autocomplete="name" autofocus
+            tabindex="1"><br>
         {{#if this.name}}
         <p class="errors">{{this.name}}</p>
         {{/if}}
