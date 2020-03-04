@@ -94,6 +94,16 @@ const products = {
             bestSeller: true,
             href: "/revhome"
         });
+        this.fakeDB.push({
+            type: `product`,
+            title: `Supper Dumbbell - 10lb`,
+            src: `/image/dumbbell.jpg`,
+            alt: `Supper Dumbbell - 10lb`,
+            category: `Fitness`,
+            price: `$25.99`,
+            bestSeller: false,
+            href: "/fitness"
+        });
     },
 
     getType() {
