@@ -7,28 +7,32 @@ const products = {
             title: `Electronics & Accessories`,
             src: `/image/Electronics.jpg`,
             alt: `Electronics`,
-            description: `Explore now`
+            description: `Explore now`,
+            href: "/electronic"
         });
         this.fakeDB.push({
             type: `cate`,
             title: `Revamp your home`,
             src: `/image/Revamp.jpg`,
             alt: `Revamp-your home`,
-            description: `Explore now`
+            description: `Explore now`,
+            href: "/revhome"
         });
         this.fakeDB.push({
             type: `cate`,
             title: `Shop Valentine's Day gifts`,
             src: `/image/valentine.jpg`,
             alt: `Shop-valentine's-day-gifts`,
-            description: `Explore now`
+            description: `Explore now`,
+            href: "/valentine"
         });
         this.fakeDB.push({
             type: `cate`,
             title: `Fitness, cardio and more`,
             src: `/image/fitness.jpg`,
             alt: `Fitness`,
-            description: `Explore now`
+            description: `Explore now`,
+            href: "/fitness"
         });
         this.fakeDB.push({
             type: `product`,
@@ -37,7 +41,8 @@ const products = {
             alt: `Straw-Choc`,
             category: `Valentine's Gift`,
             price: `$25.99`,
-            bestSeller: true
+            bestSeller: true,
+            href: "/valentine"
         });
         this.fakeDB.push({
             type: `product`,
@@ -46,7 +51,8 @@ const products = {
             alt: `Alpha-2600-Headset`,
             category: `Electronics & Accessories`,
             price: `$126.99`,
-            bestSeller: true
+            bestSeller: true,
+            href: "/electronic"
         });
         this.fakeDB.push({
             type: `product`,
@@ -55,7 +61,8 @@ const products = {
             alt: `Apple-3-Keyboard`,
             category: `Electronics & Accessories`,
             price: `$210.99`,
-            bestSeller: true
+            bestSeller: true,
+            href: "/electronic"
         });
         this.fakeDB.push({
             type: `product`,
@@ -64,7 +71,8 @@ const products = {
             alt: `Govani-x60-USB-Cable`,
             category: `Electronics & Accessories`,
             price: `$5.99`,
-            bestSeller: true
+            bestSeller: true,
+            href: "/electronic"
         });
         this.fakeDB.push({
             type: `product`,
@@ -73,7 +81,8 @@ const products = {
             alt: `COCO-lamp-white`,
             category: `Home`,
             price: `$69.99`,
-            bestSeller: false
+            bestSeller: false,
+            href: "/revhome"
         });
         this.fakeDB.push({
             type: `product`,
@@ -82,7 +91,8 @@ const products = {
             alt: `PhilliStar-Sofa-light-green`,
             category: `Home`,
             price: `$1999.99`,
-            bestSeller: true
+            bestSeller: true,
+            href: "/revhome"
         });
     },
 
@@ -115,6 +125,48 @@ const products = {
             }
         });
         return productList;
+    },
+
+    getValentine() {
+        const valentine = [];
+        this.fakeDB.forEach((product) => {
+            if (product.type === `product` && product.category === "Valentine's Gift") {
+                product.showBestSeller = (product.bestSeller) ? "show-best-seller" : "hide-best-seller";
+                valentine.push(product);
+            }
+        });
+        return valentine;
+    },
+
+    getElectronic() {
+        const electronic = [];
+        this.fakeDB.forEach((product) => {
+            if (product.type === `product` && product.category === "Electronics & Accessories") {
+                product.showBestSeller = (product.bestSeller) ? "show-best-seller" : "hide-best-seller";
+                electronic.push(product);
+            }
+        });
+        return electronic;
+    },
+    getHome() {
+        const home = [];
+        this.fakeDB.forEach((product) => {
+            if (product.type === `product` && product.category === "Home") {
+                product.showBestSeller = (product.bestSeller) ? "show-best-seller" : "hide-best-seller";
+                home.push(product);
+            }
+        });
+        return home;
+    },
+    getFitness() {
+        const fitness = [];
+        this.fakeDB.forEach((product) => {
+            if (product.type === `product` && product.category === "Fitness") {
+                product.showBestSeller = (product.bestSeller) ? "show-best-seller" : "hide-best-seller";
+                fitness.push(product);
+            }
+        });
+        return fitness;
     }
 }
 

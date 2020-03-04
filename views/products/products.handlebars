@@ -1,15 +1,35 @@
-<section class="product-list">
-    <h2>Product List: </h2>
-    <div class="product-item-container">
-        {{#each productList}}
-        <div class="product-item">
-            <img src={{this.src}} alt={{this.alt}}>
-            <p>
-                {{this.title}}<br>
-                Category: {{this.category}}<br>
-                Price: {{this.price}} <span class={{this.showBestSeller}}>&#10004;Bestseller</span>
-            </p>
+<section class="products">
+    <div class="product-cate">
+        <input type="checkbox" id="cate-nav">
+        <label for="cate-nav" class="cate-nav">
+            <i class="fas fa-bars"></i>
+        </label>
+        <ul class="cate-responsive">
+            <li class="cate-title">
+                <span>Category</span>
+            </li>
+            <ul class="cate-list">
+                <li><a href="/valentine" {{#if this.val}} class="bold" {{/if}}>Valentine's Gift</a></li>
+                <li><a href="/electronic" {{#if this.elec}} class="bold" {{/if}}>Electronics &amp; Accessories</a></li>
+                <li><a href="/revhome" {{#if this.home}} class="bold" {{/if}}>Home</a></li>
+                <li><a href="/fitness" {{#if this.fitness}} class="bold" {{/if}}>Fitness</a></li>
+                <li><a href="/all" {{#if this.all}} class="bold" {{/if}}>View All</a></li>
+            </ul>
+        </ul>
+    </div>
+    <div class="product-list">
+        <h2>Product List: </h2>
+        <div class="product-item-container">
+            {{#each productList}}
+            <div class="product-item">
+                <img src={{this.src}} alt={{this.alt}}>
+                <p>
+                    {{this.title}}<br>
+                    Category: <a href={{this.href}}>{{this.category}}</a><br>
+                    Price: {{this.price}} <span class={{this.showBestSeller}}>&#10004;Bestseller</span>
+                </p>
+            </div>
+            {{/each}}
         </div>
-        {{/each}}
     </div>
 </section>
