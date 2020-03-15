@@ -4,6 +4,8 @@ const exphbs = require('express-handlebars');
 
 const bodyParser = require('body-parser');
 
+const mongoose = require('mongoose');
+
 require('dotenv').config({path:"./config/keys.env"});
 
 const app = express();
@@ -22,6 +24,12 @@ const formController = require("./controllers/form");
 
 app.use("/", productController);
 app.use("/form", formController);
+
+mongoose.connect(process.env.MONGO_DB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
+.then(()=>{
+    console.log(`MongoDB connected`);
+})
+.catch(err=>console.log(`Error while connecting to mongoDB ${err}`));
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
