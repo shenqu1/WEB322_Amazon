@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 router.get("/registration", (req, res) => {
-    res.render("form/registration", {
+    res.render("user/registration", {
         title: `Registration Page`
     });
 });
@@ -59,7 +59,7 @@ router.post("/registration", (req, res) => {
         errors.display = true;
     }
     if (errors.display) {
-        res.render("form/registration", errors);
+        res.render("user/registration", errors);
     } else {
         const dashboard = {
             title: "Dashboard",
@@ -78,7 +78,7 @@ router.post("/registration", (req, res) => {
         };
         sgMail.send(msg)
             .then(() => {
-                res.render("form/dashboard", dashboard);
+                res.render("user/dashboard", dashboard);
             })
             .catch(err => {
                 console.log(`Error ${err}`);
@@ -87,7 +87,7 @@ router.post("/registration", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-    res.render("form/login", {
+    res.render("user/login", {
         title: `Login Page`
     });
 });
@@ -116,9 +116,9 @@ router.post("/login", (req, res) => {
     }
 
     if (errors.display) {
-        res.render("form/login", errors);
+        res.render("user/login", errors);
     } else {
-        res.render("User/clerkDashboard", {
+        res.render("user/clerkDashboard", {
             title: `Clerk Dashboard`
         });
     }

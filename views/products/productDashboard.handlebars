@@ -4,11 +4,11 @@
     <form class="products-search-form" method="POST" action="/products/search">
         <label>Search By</label>
         <select class="products-select" name="products-search">
-            <option value="all">All Products</option>
-            <option value="valentine">Valentine's Gift</option>
-            <option value="electronic">Electronic &amp; Accessories</option>
-            <option value="revhome">Home</option>
-            <option value="fitness">Fiitness</option>
+            <option value="all" {{#if this.all}} selected {{/if}}>All Products</option>
+            <option value="valentine" {{#if this.valen}} selected {{/if}}>Valentine's Gift</option>
+            <option value="electronic" {{#if this.elec}} selected {{/if}}>Electronic &amp; Accessories</option>
+            <option value="revhome" {{#if this.home}} selected {{/if}}>Home</option>
+            <option value="fitness" {{#if this.fit}} selected {{/if}}>Fiitness</option>
         </select>
         <input class="product-search-button" type="submit" value="Search">
     </form>

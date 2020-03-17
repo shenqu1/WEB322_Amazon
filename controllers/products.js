@@ -72,4 +72,27 @@ router.get("/product/add", (req,res) => {
     });
 });
 
+router.post("/products/search", (req,res) => {
+    const showList = {
+        title: `Product Dashboard`
+    };
+    if(req.body["products-search"] == "all") {
+        showList.productList = productModel.getProductList();
+        showList.all = true;
+    } else if(req.body["products-search"] == "valentine") {
+        showList.productList = productModel.getValentine();
+        showList.valen = true;
+    }else if(req.body["products-search"] == "electronic") {
+        showList.productList = productModel.getElectronic();
+        showList.elec = true;
+    }else if(req.body["products-search"] == "revhome") {
+        showList.productList = productModel.getHome();
+        showList.home = true;
+    }else if(req.body["products-search"] == "fitness") {
+        showList.productList = productModel.getFitness();
+        showList.fit = true;
+    }
+    res.render("products/productDashboard", showList);
+})
+
 module.exports = router;

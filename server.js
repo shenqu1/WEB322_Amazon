@@ -20,10 +20,10 @@ app.use(bodyParser.urlencoded({
 }));
 
 const productController = require("./controllers/products");
-const formController = require("./controllers/form");
+const userController = require("./controllers/user");
 
 app.use("/", productController);
-app.use("/form", formController);
+app.use("/user", userController);
 
 mongoose.connect(process.env.MONGO_DB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(()=>{

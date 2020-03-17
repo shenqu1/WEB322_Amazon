@@ -1,6 +1,6 @@
 <section class="infoForm">
     <h1>Sign-In</h1>
-    <form class="reg-form" action="/form/login" method="post">
+    <form class="reg-form" action="/user/login" method="post">
         <label for="log-email">Email</label><br>
         <input type="text" {{#if this.email}} class="red-border" {{/if}} {{#if this.emailValue}}
             value="{{this.emailValue}}" {{/if}} id="log-email" name="log-email" autocomplete="email" tabindex="1"

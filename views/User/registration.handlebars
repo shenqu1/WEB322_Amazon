@@ -1,6 +1,6 @@
 <section class="infoForm">
     <h1>Create account</h1>
-    <form class="reg-form" action="/form/registration" method="post">
+    <form class="reg-form" action="/user/registration" method="post">
         <label for="reg-name">Your name</label><br>
         <input type="text" {{#if this.name}} class="red-border" {{/if}} {{#if this.nameValue}}
             value="{{this.nameValue}}" {{/if}} id="reg-name" name="reg-name" autocomplete="name" autofocus
