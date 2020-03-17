@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+
 router.get("/registration", (req, res) => {
     res.render("form/registration", {
         title: `Registration Page`
@@ -117,7 +118,9 @@ router.post("/login", (req, res) => {
     if (errors.display) {
         res.render("form/login", errors);
     } else {
-        res.redirect("/");
+        res.render("User/clerkDashboard", {
+            title: `Clerk Dashboard`
+        });
     }
 
 });

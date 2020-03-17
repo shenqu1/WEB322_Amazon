@@ -1,0 +1,57 @@
+<section class="productDash">
+    <h1>Products Dashboard</h1>
+
+    <form class="products-search-form" method="POST" action="/products/search">
+        <label>Search By</label>
+        <select class="products-select" name="products-search">
+            <option value="all">All Products</option>
+            <option value="valentine">Valentine's Gift</option>
+            <option value="electronic">Electronic &amp; Accessories</option>
+            <option value="revhome">Home</option>
+            <option value="fitness">Fiitness</option>
+        </select>
+        <input class="product-search-button" type="submit" value="Search">
+    </form>
+    <div id="product-links-holder">
+        <a href="/product/add">Add a product</a>
+    </div>
+    <div class="products-table">
+        <table border="1">
+            <thread>
+                <th>Title</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Bestseller</th>
+                <th>Operation</th>
+            </thread>
+            <tbody>
+                {{#each productList}}
+                <tr>
+                    <td>
+                        <span>{{this.title}}</span>
+                    </td>
+                    <td>
+                        <img src={{this.src}} alt={{this.alt}}>
+                    </td>
+                    <td>
+                        <span>{{this.category}}</span>
+                    </td>
+                    <td>
+                        <span>{{this.price}}</span>
+                    </td>
+                    <td>
+                        <span>{{this.bestSeller}}</span>
+                    </td>
+                    <td>
+                        <a href="" class="edit-delete-button">Edit</a> <br><br>
+                        <a href="" class="edit-delete-button">Delete</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+
+</section>

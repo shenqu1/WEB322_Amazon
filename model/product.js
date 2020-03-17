@@ -134,6 +134,13 @@ const products = {
                 productList.push(product);
             }
         });
+        productList.sort((a,b)=>{
+            let x = a.category.toLowerCase();
+            let y = b.category.toLowerCase();
+            if(x < y) {return -1;}
+            if(x > y) {return 1;}
+            return 0;
+        });
         return productList;
     },
 

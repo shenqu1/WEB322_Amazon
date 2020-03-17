@@ -407,18 +407,30 @@ h2 {
     font-size: 1.5em;
 }
 
-.reg-log label {
+.reg-form label {
     margin-left: 4%;
     font-size: 1rem;
 }
 
-.reg-log input {
+.reg-form input,
+.reg-form select {
     margin: 0 4% 2%;
     width: 92%;
     padding: 0.3em;
 }
 
-.reg-log p {
+.reg-form input[type='checkbox'] {
+    transform: scale(1.6);
+    width: auto;
+    margin: 0 2%;
+}
+
+.reg-form input[type='checkbox']:hover,
+.reg-form input[type='checkbox']:focus{
+    cursor: pointer;
+}
+
+.reg-form p {
     margin: 2% 4%;
     font-size: 0.7rem;
 }
@@ -453,7 +465,7 @@ h2 {
 }
 
 /******************************************************************
-                                Dashboard
+                               Register Dashboard
 *******************************************************************/
 .dashboard {
     margin: 40px 20px;
@@ -473,6 +485,52 @@ h2 {
     text-decoration: none;
 }
 
+/******************************************************************
+                               Products Dashboard
+*******************************************************************/
+
+.productDash{
+    margin-left: 3%;
+    padding: 20px 0;
+}
+
+.productDash > h1 {
+    margin-bottom: 1rem;
+}
+
+.products-search-form {
+    margin-bottom: 1rem;
+
+}
+
+.products-select {
+    padding: 0.5rem;
+    width: 250px;
+}
+
+.product-search-button {
+    padding: 0.4rem;
+}
+.product-search-button:hover,
+.product-search-button:focus {
+    cursor: pointer;
+}
+
+#product-links-holder {
+    margin-bottom: 0.8rem;
+}
+
+.products-table {
+    max-width: 100%;
+    overflow-x: auto;
+    text-align: center;
+}
+
+
+.products-table img {
+  width: 250px;
+  display: block;
+}
 
 
 /******************************************************************

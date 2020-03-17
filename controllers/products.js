@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 router.get("/products", (req, res) => {
     res.render("products/products", {
         title: `Product List`,
-        productList: productModel.getProductList(),
+        productList: productModel.getProductList()
     });
 });
 
@@ -50,11 +50,25 @@ router.get("/fitness", (req, res) => {
     });
 });
 
+
 router.get("/all", (req, res) => {
     res.render("products/products", {
         title: `Product List/all`,
         productList: productModel.getProductList(),
         all: true
+    });
+});
+
+router.get("/productDashboard", (req,res) => {
+    res.render("products/productDashboard", {
+        title: `Product Dashboard`,
+        productList: productModel.getProductList()
+    });
+});
+
+router.get("/product/add", (req,res) => {
+    res.render("products/productAddForm", {
+        title: `Add Products`
     });
 });
 

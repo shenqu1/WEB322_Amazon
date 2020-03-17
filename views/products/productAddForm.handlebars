@@ -1,0 +1,29 @@
+<section class="infoForm">
+<h1> Add Product</h1>
+
+<form class="reg-form" method="POST" action="/product/add">
+    <label for="title">Product Name</label> <br>
+    <input type="text" name="title" id="title"> <br><br>
+
+    <label>Category</label> <br>
+    <select name="categoty">
+            <option value="valentine">Valentine's Gift</option>
+            <option value="electronic">Electronic &amp; Accessories</option>
+            <option value="revhome">Home</option>
+            <option value="fitness">Fiitness</option>
+    </select> <br><br>
+
+    <label for="price">Price</label> <br>
+    <input type="text" name="price" id="price"> <br><br>
+
+    <label for="bestSeller">BestSeller</label>
+    <input type="checkbox" id="bestSeller" name="bestSeller"> <br><br>
+
+    <label>Product Image Upload</label> <br>
+    <input type="file" name="productImage"> <br><br>
+
+    <input type="submit" values="Add Product">
+
+</form>
+
+</section>
