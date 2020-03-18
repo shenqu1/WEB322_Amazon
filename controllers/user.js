@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const csrf = require('csurf');
 
+const csrfProtection = csrf();
+router.use(csrfProtection);
 
-router.get("/registration", (req, res) => {
+router.get("/registration", (req, res, next) => {
     res.render("user/registration", {
+        csrfToken: req.csrfToken(),
         title: `Registration Page`
     });
 });

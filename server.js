@@ -6,12 +6,16 @@ const bodyParser = require('body-parser');
 
 const mongoose = require('mongoose');
 
+const session = require('express-session');
+
 require('dotenv').config({path:"./config/keys.env"});
 
 const app = express();
 
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
+
+app.use(session({secret: 'mysupersecret', resave: false, saveUninitialized: false}));
 
 app.use(express.static("public"));
 
