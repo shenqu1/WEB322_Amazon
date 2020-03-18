@@ -22,7 +22,7 @@ const productSchema = new Schema({
       type: Boolean,
       required: true
   },
-  img:
+  imgPath:
   {
     type: String,
     required: true

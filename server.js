@@ -8,6 +8,10 @@ const mongoose = require('mongoose');
 
 const session = require('express-session');
 
+const passport = require('passport');
+
+const flash = require('connect-flash');
+
 require('dotenv').config({path:"./config/keys.env"});
 
 const app = express();
@@ -16,6 +20,12 @@ app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
 app.use(session({secret: 'mysupersecret', resave: false, saveUninitialized: false}));
+
+app.use(flash());
+
+app.use(passport.initialize());
+
+app.use(passport.session());
 
 app.use(express.static("public"));
 
