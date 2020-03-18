@@ -93,6 +93,12 @@ router.post("/products/search", (req,res) => {
         showList.fit = true;
     }
     res.render("products/productDashboard", showList);
-})
+});
+
+router.get("/productDescription", (req,res) => {
+    res.render("products/productDescription", {
+        title: `Product Description`
+    });
+});
 
 module.exports = router;

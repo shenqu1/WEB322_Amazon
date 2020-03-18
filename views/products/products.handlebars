@@ -22,7 +22,7 @@
         <div class="product-item-container">
             {{#each productList}}
             <div class="product-item">
-                <img src={{this.src}} alt={{this.alt}}>
+                <a href="/productDescription"><img src={{this.src}} alt={{this.alt}}></a>
                 <p>
                     {{this.title}}<br>
                     Category: <a href={{this.href}}>{{this.category}}</a><br>
