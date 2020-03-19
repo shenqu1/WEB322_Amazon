@@ -22,6 +22,7 @@
                 <th>Image</th>
                 <th>Category</th>
                 <th>Price</th>
+                <th>Inventory</th>
                 <th>Bestseller</th>
                 <th>Operation</th>
             </thread>
@@ -32,13 +33,16 @@
                         <span>{{this.title}}</span>
                     </td>
                     <td>
-                        <img src={{this.src}} alt={{this.alt}}>
+                        <img src={{this.imgPath}} alt={{this.alt}}>
                     </td>
                     <td>
                         <span>{{this.category}}</span>
                     </td>
                     <td>
                         <span>{{this.price}}</span>
+                    </td>
+                    <td>
+                        <span>{{this.inventory}}</span>
                     </td>
                     <td>
                         <span>{{this.bestSeller}}</span>

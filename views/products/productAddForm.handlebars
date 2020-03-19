@@ -7,14 +7,17 @@
 
     <label>Category</label> <br>
     <select name="categoty">
-            <option value="valentine">Valentine's Gift</option>
-            <option value="electronic">Electronic &amp; Accessories</option>
-            <option value="revhome">Home</option>
-            <option value="fitness">Fiitness</option>
+            <option value="Valentine's Gift">Valentine's Gift</option>
+            <option value="Electronics & Accessories">Electronic &amp; Accessories</option>
+            <option value="Home">Home</option>
+            <option value="Fitness">Fiitness</option>
     </select> <br><br>
 
     <label for="price">Price</label> <br>
-    <input type="text" name="price" id="price"> <br><br>
+    <input type="number" name="price" id="price" min="0.00" step="0.01"> <br><br>
+
+    <label for="inventory">Inventory</label> <br>
+    <input type="number" name="inventory" id="inventory" min="0"> <br><br>
 
     <label for="bestSeller">BestSeller</label>
     <input type="checkbox" id="bestSeller" name="bestSeller"> <br><br>

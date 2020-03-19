@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
 const productModel = require("../model/product");
+const productsModel = require("../model/products");
 
 router.get("/", (req, res) => {
     res.render("products/home", {
@@ -99,6 +99,23 @@ router.get("/productDescription", (req,res) => {
     res.render("products/productDescription", {
         title: `Product Description`
     });
+});
+
+router.post("/product/add", (req,res)=>{
+    const newProduct = {
+        title: req.body.title,
+        category: req.body.category,
+        price: req.body.price,
+        inventory: req.body.inventory,
+        bestSeller: (req.body.bestSeller ? true : false),
+        imgPath: req.body.imgPath
+    }
+    const product = new productsModel(newProduct);
+    product.save()
+    .then(()=>{
+        res.redirect("/productDashboard");
+    })
+    .catch(err=>console.log(`Erroe occured while entering into the database ${err}`));
 });
 
 module.exports = router;

@@ -22,11 +22,11 @@
         <div class="product-item-container">
             {{#each productList}}
             <div class="product-item">
-                <a href="/productDescription"><img src={{this.src}} alt={{this.alt}}></a>
+                <a href="/productDescription"><img src={{this.imgPath}} alt={{this.title}}></a>
                 <p>
                     {{this.title}}<br>
                     Category: <a href={{this.href}}>{{this.category}}</a><br>
-                    Price: {{this.price}} <span class={{this.showBestSeller}}>&#10004;Bestseller</span>
+                    Price: ${{this.price}} <span class={{this.showBestSeller}}>&#10004;Bestseller</span>
                 </p>
             </div>
             {{/each}}

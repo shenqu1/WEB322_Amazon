@@ -17,7 +17,12 @@ const productSchema = new Schema({
       type: Number,
       required: true
   },
-  bestSeler:
+  inventory:
+  {
+    type: Number,
+    required: true
+  },
+  bestSeller:
   {
       type: Boolean,
       required: true
@@ -36,4 +41,4 @@ const productSchema = new Schema({
 
 const products = mongoose.model('Products', productSchema);
 
-model.export=products;
+module.export=products;

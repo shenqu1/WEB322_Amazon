@@ -45,6 +45,8 @@ mongoose.connect(process.env.MONGO_DB_URL, {useNewUrlParser: true, useUnifiedTop
 })
 .catch(err=>console.log(`Error while connecting to mongoDB ${err}`));
 
+require("./config/passport");
+
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Web Connected!`);
