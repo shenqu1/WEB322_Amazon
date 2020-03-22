@@ -18,7 +18,7 @@
         <label for="reg-password">Password</label><br>
         <input type="password" {{#if this.password}} class="red-border" {{/if}} {{#if this.passwordValue}}
             value="{{this.passwordValue}}" {{/if}} name="reg-password" id="reg-password" tabindex="3"
-            placeholder="6 - 12 characters, letters and numbers only"><br>
+            ><br>
         <p id="notice">*Passwords must have 6 - 12 characters, letters and numbers only</p>
         {{#if this.password}}
         <p class="errors">{{this.password}}</p>

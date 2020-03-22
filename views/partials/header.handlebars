@@ -1,0 +1,24 @@
+{{#if dash}}
+        <div class="hide-dash"></div>
+        {{else}}
+        <header>
+            <img src="/image/amazon-logo.jpg" alt="logo">
+            <form id="search-form" action="" method="POST">
+                <input id="search" required name="search" type="text">
+                <button id="search-button" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+            <nav>
+                <input type="checkbox" id="check">
+                <label for="check" class="checkbtn">
+                    <i class="fas fa-bars"></i>
+                </label>
+                <ul class="responsive">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/products">Products Page</a></li>
+                    <li><a href="/user/registration">Customer Registration</a></li>
+                    <li><a href="/user/login">Login</a></li>
+                </ul>
+            </nav>
+
+        </header>
+        {{/if}}

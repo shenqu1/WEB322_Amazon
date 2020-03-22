@@ -118,4 +118,18 @@ router.post("/product/add", (req,res)=>{
     .catch(err=>console.log(`Erroe occured while entering into the database ${err}`));
 });
 
+router.get("/productDescription", (req, res) => {
+    res.render("products/productDescription", {
+        title: `Product Description`
+    });
+});
+
+router.get("/shoppingCart", (req, res) => {
+    res.render("products/shoppingCart", {
+        title: `Shopping Cart`
+    });
+});
+
+
+
 module.exports = router;

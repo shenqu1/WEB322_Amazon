@@ -71,5 +71,24 @@ passport.use('local.registration', new LocalStrategy({
             }
             return done(null, newUser);
         });
-    })
+    });
+}));
+
+passport.use('local.signin', new LocalStrategy({
+    usernameField: "log-email",
+    passwordField: "log-password",
+    passReqToCallback: true
+}, (req, username, password, done)=>{
+    User.findOne({'email': username}, (err, user)=>{
+        if(err) {
+            return done(err);
+        }
+        if(!user) {
+            return done(null, false, {message: 'No user found.'});
+        }
+        if(!user.validPassword(password)) {
+            return done(null, false, {message: 'Wrong password.'});
+        }
+        return done(null, user);
+    });
 }));

@@ -9,9 +9,13 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 100%;
+}
+
 .site {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     line-height: 1.7rem;
     display: grid;
     grid-template-rows: auto 1fr auto;
@@ -413,7 +417,8 @@ h2 {
 }
 
 .reg-form input,
-.reg-form select {
+.reg-form select,
+.reg-form textarea {
     margin: 0 4% 2%;
     width: 92%;
     padding: 0.3em;
@@ -426,7 +431,7 @@ h2 {
 }
 
 .reg-form input[type='checkbox']:hover,
-.reg-form input[type='checkbox']:focus{
+.reg-form input[type='checkbox']:focus {
     cursor: pointer;
 }
 
@@ -489,12 +494,12 @@ h2 {
                                Products Dashboard
 *******************************************************************/
 
-.productDash{
+.productDash {
     margin-left: 3%;
     padding: 20px 0;
 }
 
-.productDash > h1 {
+.productDash>h1 {
     margin-bottom: 1rem;
 }
 
@@ -511,6 +516,7 @@ h2 {
 .product-search-button {
     padding: 0.4rem;
 }
+
 .product-search-button:hover,
 .product-search-button:focus {
     cursor: pointer;
@@ -528,10 +534,200 @@ h2 {
 
 
 .products-table img {
-  width: 250px;
-  display: block;
+    width: 250px;
+    display: block;
 }
 
+/******************************************************************
+                               Products Description
+*******************************************************************/
+.container {
+    padding-top: 30px;
+
+}
+
+.item-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #f6f6f6;
+}
+
+.btn-success {
+    width: 100%;
+    border-radius: 0;
+}
+
+.section {
+    width: 100%;
+    margin-left: -15px;
+    padding: 2px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background: #f8f9f9
+}
+
+.title-price {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: black
+}
+
+.btn-minus {
+    cursor: pointer;
+    font-size: 7px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid gray;
+    border-radius: 2px;
+    border-right: 0;
+}
+
+.btn-plus {
+    cursor: pointer;
+    font-size: 7px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid gray;
+    border-radius: 2px;
+    border-left: 0;
+}
+
+div.section>div {
+    width: 100%;
+    display: inline-flex;
+}
+
+div.section>div>input {
+    margin: 0;
+    padding-left: 5px;
+    font-size: 10px;
+    padding-right: 5px;
+    max-width: 18%;
+    text-align: center;
+}
+
+
+@media (max-width: 426px) {
+    .container {
+        margin-top: 0px !important;
+    }
+
+    .container>.row {
+        padding: 0 !important;
+    }
+
+    .container>.row>.col-xs-6 {
+        padding-right: 0;
+    }
+
+    .container>.row>.col-xs-6>div>p {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .container>.row>.col-xs-6>div>ul {
+        padding-left: 10px !important;
+
+    }
+    .btn-minus {
+
+        font-size: 5px;
+        display: flex;
+        align-items: center;
+
+        padding-left: 5px;
+        padding-right: 5px;
+       
+    }
+    
+    .btn-plus {
+        font-size: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    div.section>div>input {
+        padding-left: 2px;
+        font-size: 10px;
+        padding-right: 2px;
+
+    }
+    .section {
+        width: 100%;
+        padding-bottom:20px;
+    }
+    .glyphicon-shopping-cart {
+        display:none;
+    }
+}
+
+/******************************************************************
+                                Shopping Cart
+*******************************************************************/
+
+.table>tbody>tr>td,
+.table>tfoot>tr>td {
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 600px) {
+    table#cart tbody td .quanty-form {
+        width: 20%;
+        display: inline !important;
+    }
+
+    .actions .btn {
+        width: 36%;
+        margin: 1.5em 0;
+    }
+
+    .actions .btn-info {
+        float: left;
+    }
+
+    .actions .btn-danger {
+        float: right;
+    }
+
+    table#cart thead {
+        display: none;
+    }
+
+    table#cart tbody td {
+        display: block;
+        padding: .6rem;
+        min-width: 320px;
+    }
+
+    table#cart tbody tr td:first-child {
+        background: #333;
+        color: #fff;
+    }
+
+    table#cart tbody td:before {
+        content: attr(data-th);
+        font-weight: bold;
+        display: inline-block;
+        width: 8rem;
+    }
+
+
+
+    table#cart tfoot td {
+        display: block;
+    }
+
+    table#cart tfoot td .btn {
+        display: block;
+    }
+
+}
 
 /******************************************************************
                                 Responsive
@@ -587,6 +783,7 @@ h2 {
         right: -100%;
         text-align: center;
         transition: all .5s;
+        z-index: 1000;
     }
 
     #check:checked~ul {

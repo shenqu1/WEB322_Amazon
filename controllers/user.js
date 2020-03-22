@@ -188,11 +188,21 @@ router.get("/dashboard", (req,res)=>{
 }); */
 
 router.get("/login", (req, res) => {
+    const messages = req.flash('error');
     res.render("user/login", {
-        //csrfToken: req.csrfToken(),
-        title: `Login Page`
+        csrfToken: req.csrfToken(),
+        title: `Login Page`,
+        messages: messages,
+        hasErrors: messages.length > 0
     });
 });
+
+/* router.post("/login", passport.authenticate('local.signin', {
+    successRedirect: "/user/dashboard",
+    failureRedirect: "/user/login",
+    failureFlash: true
+})); */
+
 
 router.post("/login", (req, res) => {
     const errors = {
@@ -225,6 +235,6 @@ router.post("/login", (req, res) => {
         });
     }
 
-});
+}); 
 
 module.exports = router;
