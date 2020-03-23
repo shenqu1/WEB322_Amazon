@@ -28,7 +28,6 @@ router.get("/registration", (req, res) => {
             errMessage.match = mes;
         }
     });
-    console.log(messages);
     res.render("user/registration", errMessage);
 });
 

@@ -203,6 +203,16 @@ const products = {
             }
         });
         return fitness;
+    },
+    getSearch(name) {
+        const productList = [];
+        this.fakeDB.forEach((product) => {
+            if(product.type === `product` && product.title.toLowerCase().includes(name.toLowerCase())) {
+                product.showBestSeller = (product.bestSeller) ? "show-best-seller" : "hide-best-seller";
+                productList.push(product);
+            }
+        });
+        return productList;
     }
 }
 

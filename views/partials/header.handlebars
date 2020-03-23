@@ -3,8 +3,9 @@
         {{else}}
         <header>
             <img src="/image/amazon-logo.jpg" alt="logo">
-            <form id="search-form" action="" method="POST">
-                <input id="search" required name="search" type="text">
+            <form id="search-form" action="/custSearch" method="POST">
+                <input id="search" required name="search" type="text" {{#if hasValue}}
+                value="{{searchValue}}"{{/if}}>
                 <button id="search-button" type="submit"><i class="fas fa-search"></i></button>
             </form>
             <nav>

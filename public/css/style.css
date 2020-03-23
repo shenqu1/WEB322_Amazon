@@ -204,6 +204,7 @@ nav>ul>li>a:focus,
 #sub-button {
     padding: 0.3em;
     border-radius: 5px;
+    color:#535c68;
 }
 
 #sub-button:hover,
@@ -678,7 +679,6 @@ div.section>div>input {
 
 @media screen and (max-width: 600px) {
     table#cart tbody td .quanty-form {
-        width: 20%;
         display: inline !important;
     }
 

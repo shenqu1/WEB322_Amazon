@@ -130,6 +130,19 @@ router.get("/shoppingCart", (req, res) => {
     });
 });
 
+router.post("/custSearch", (req,res) => {
+    const searchValue = req.body.search;
+    const list = productModel.getSearch(searchValue);
+    const notmatch = list.length > 0 ? false : true;
+
+    res.render("products/products", {
+        title: `Search Result`,
+        searchValue: searchValue,
+        hasValue: true,
+        productList: list,
+        notmatch: notmatch
+    });
+});
 
 
 module.exports = router;
