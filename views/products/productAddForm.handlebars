@@ -1,13 +1,13 @@
 <section class="infoForm">
 <h1> Add Product</h1>
 
-<form class="reg-form" method="POST" action="/product/add">
+<form class="reg-form" method="POST" action="/product/add" enctype="multipart/form-data">
     <label for="title">Product Name</label> <br>
     <input type="text" name="title" id="title"> <br>
 
     <label>Category</label> <br>
-    <select name="categoty">
-            <option value="Valentine's Gift">Valentine's Gift</option>
+    <select name="category">
+            <option value="Valentine's Gift" >Valentine's Gift</option>
             <option value="Electronics & Accessories">Electronic &amp; Accessories</option>
             <option value="Home">Home</option>
             <option value="Fitness">Fiitness</option>
@@ -26,7 +26,7 @@
     <input type="checkbox" id="bestSeller" name="bestSeller"> <br>
 
     <label>Product Image Upload</label> <br>
-    <input type="file" name="productImage"> <br>
+    <input type="file" name="productImg" id="productImg"> <br>
 
     <input type="submit" values="Add Product">
 
