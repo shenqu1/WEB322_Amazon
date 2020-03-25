@@ -1,0 +1,34 @@
+<section class="infoForm">
+<h1> Edit Product</h1>
+
+<form class="reg-form" method="POST" action="/product/update/{{product.id}}?method=PUT" enctype="multipart/form-data">
+    <label for="title">Product Name</label> <br>
+    <input type="text" name="title" id="title" value="{{product.title}}"> <br>
+
+    <label>Category</label> <br>
+    <select name="category">
+        {{#each cat}}
+        <option value="{{this.category}}" {{#if this.show}} selected {{/if}}>{{this.category}}</option>
+        {{/each}}
+    </select> <br>
+
+    <label for="price">Price</label> <br>
+    <input type="number" name="price" id="price" min="0.00" step="0.01" value="{{product.price}}"> <br>
+
+    <label for="inventory">Inventory</label> <br>
+    <input type="number" name="inventory" id="inventory" min="0" value="{{product.inventory}}"> <br>
+
+    <label for="description">Product Description</label><br>
+    <textarea id="description" name="description">{{product.description}}</textarea><br>
+
+    <label for="bestSeller">BestSeller</label>
+    <input type="checkbox" id="bestSeller" name="bestSeller" {{#if product.bestSeller}} checked {{/if}}> <br>
+
+    <label>Product Image Upload</label> <br>
+    <input type="file" name="productImg" id="productImg"> <br>
+
+    <input type="submit" values="Update Product">
+
+</form>
+
+</section>

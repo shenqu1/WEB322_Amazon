@@ -4,15 +4,17 @@
     <form class="products-search-form" method="POST" action="/products/search">
         <label>Search By</label>
         <select class="products-select" name="products-search">
-            <option value="All Products">All Products</option>
-            <option value="Valentine's Gift" {{#matchSelect search "Valentine's Gift"}}{{/matchSelect}}>Valentine's Gift</option>
-            <option value="Electronic & Accessories" {{#matchSelect search "Electronic & Accessories"}}{{/matchSelect}}>Electronic &amp; Accessories</option>
-            <option value="Home" {{#matchSelect search "Home"}}{{/matchSelect}}>Home</option>
-            <option value="Fiitness" {{#matchSelect search "Fiitness"}}{{/matchSelect}}>Fiitness</option>
+            <option value="all">All Products</option>
+            {{#each cat}}
+            <option value="{{this.category}}"{{#if this.select}} selected {{/if}}>{{this.category}}</option>
+            {{/each}}
         </select>
         <input class="product-search-button" type="submit" value="Search">
     </form>
-    <div id="product-links-holder">
+    <div class="product-links-holder">
+        <a href="/product/addCategory">Add a Category</a>
+    </div>
+    <div class="product-links-holder">
         <a href="/product/add">Add a product</a>
     </div>
     <div class="products-table">
@@ -48,8 +50,8 @@
                         <span>{{this.bestSeller}}</span>
                     </td>
                     <td>
-                        <a href="" class="edit-delete-button">Edit</a> <br><br>
-                        <a href="" class="edit-delete-button">Delete</a>
+                        <a href="/product/edit/{{this.id}}" class="edit-delete-button">Edit</a> <br><br>
+                        <a href="/product/delete/{{this.id}}?method=DELETE" class="edit-delete-button">Delete</a>
                     </td>
                 </tr>
                 {{else}}

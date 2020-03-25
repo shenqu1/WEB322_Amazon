@@ -7,10 +7,9 @@
 
     <label>Category</label> <br>
     <select name="category">
-            <option value="Valentine's Gift" >Valentine's Gift</option>
-            <option value="Electronics & Accessories">Electronic &amp; Accessories</option>
-            <option value="Home">Home</option>
-            <option value="Fitness">Fiitness</option>
+        {{#each cat}}
+        <option value="{{this.category}}" >{{this.category}}</option>
+        {{/each}}
     </select> <br>
 
     <label for="price">Price</label> <br>

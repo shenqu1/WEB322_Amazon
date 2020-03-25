@@ -9,11 +9,10 @@
                 <span>Category</span>
             </li>
             <ul class="cate-list">
-                <li><a href="/valentine" {{#if this.val}} class="bold" {{/if}}>Valentine's Gift</a></li>
-                <li><a href="/electronic" {{#if this.elec}} class="bold" {{/if}}>Electronics &amp; Accessories</a></li>
-                <li><a href="/revhome" {{#if this.home}} class="bold" {{/if}}>Home</a></li>
-                <li><a href="/fitness" {{#if this.fitness}} class="bold" {{/if}}>Fitness</a></li>
-                <li><a href="/all" {{#if this.all}} class="bold" {{/if}}>View All</a></li>
+                {{#each cat}}
+                <li><a href="/category/{{this.id}}" {{#if this.show}} class="bold" {{/if}}>{{this.category}}</a></li>
+                {{/each}}
+                <li><a href="/products">View All</a></li>
             </ul>
         </ul>
     </div>
@@ -25,7 +24,7 @@
                 <a href="/productDescription"><img src="/uploads/{{this.productImg}}" alt={{this.title}}></a>
                 <p>
                     {{this.title}}<br>
-                    Category: <a href={{this.href}}>{{this.category}}</a><br>
+                    Category: {{this.category}}<br>
                     Price: ${{this.price}} <span class={{this.showBestSeller}}>&#10004;Bestseller</span>
                 </p>
             </div>
