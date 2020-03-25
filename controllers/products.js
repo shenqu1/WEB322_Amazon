@@ -52,7 +52,21 @@ router.get("/products", (req, res) => {
                     showBestSeller: (product.bestSeller ? "show-best-seller" : "hide-best-seller")
                 }
             });
-            filteredProducts.sort((a, b) => {
+            const productList = [];
+            categoryModel.find()
+        .then((categories) => {
+            const filteredCategories = categories.map((cat) => {
+                filteredProducts.forEach((pro)=>{
+                    if(pro.category == cat.category) {
+                        productList.push(pro);
+                    }
+                });
+                return {
+                    id: cat._id,
+                    category: cat.category
+                }
+            });
+            productList.sort((a, b) => {
                 let x = a.category.toLowerCase();
                 let y = b.category.toLowerCase();
                 if (x < y) {
@@ -63,18 +77,10 @@ router.get("/products", (req, res) => {
                 }
                 return 0;
             });
-            categoryModel.find()
-        .then((categories) => {
-            const filteredCategories = categories.map((cat) => {
-                return {
-                    id: cat._id,
-                    category: cat.category
-                }
-            });
             res.render("products/products", {
                 title: "Product List",
                 cat: filteredCategories,
-                productList: filteredProducts
+                productList: productList
             });
         })      
         })
@@ -155,7 +161,8 @@ router.get("/productDashboard", (req, res) => {
                     const filteredCategories = categories.map((cat) => {
                         return {
                             id: cat._id,
-                            category: cat.category
+                            category: cat.category,
+                            categoryImg: cat.categoryImg
                         }
                     });
 
@@ -326,6 +333,56 @@ router.delete("/product/delete/:id", (req,res)=>{
 
 });
 
+router.get("/category/edit/:id", (req,res)=>{
+    categoryModel.findById(req.params.id)
+    .then((cat)=>{
+
+        const category = {
+            id: cat._id,
+            category: cat.category
+        }
+        
+        res.render("products/categoryEditForm", {
+            title: `Edit Category`,
+            category: category
+        });
+
+    })
+    .catch(err => console.log(`Error occoured when pulling from the database ${err}`));
+});
+
+router.put("/category/update/:id", (req,res)=>{
+
+    const category = {
+        category: req.body.category,
+    }
+    if(req.files) {
+        req.files.categoryImg.name = `cat_img_${req.params.id}${path.parse(req.files.categoryImg.name).ext}`;
+        req.files.categoryImg.mv(`public/uploads/${req.files.categoryImg.name}`)
+        .then(()=>{
+            category.categoryImg = req.files.categoryImg.name;
+        })
+        .catch(err=>console.log(`Error occured when move files ${err}`));
+    } 
+    categoryModel.updateOne({_id:req.params.id}, category)
+    .then(()=>{
+        res.redirect(`/productDashboard`);
+    })
+    .catch(err => console.log(`Error occoured when updateing to the database ${err}`));
+});
+
+router.delete("/category/delete/:id", (req,res)=>{
+
+    categoryModel.deleteOne({_id:req.params.id})
+    .then(()=>{
+        res.redirect(`/productDashboard`);
+    })
+    .catch(err => console.log(`Error occoured when deleting from the database ${err}`));
+
+});
+
+
+
 router.post("/products/search", (req, res) => {
     const search = req.body["products-search"];
     if (search == "all") {
@@ -351,7 +408,8 @@ router.post("/products/search", (req, res) => {
                         const filteredCategories = categories.map((cat) => {
                             return {
                                 id: cat._id,
-                                category: cat.category
+                                category: cat.category,
+                                categoryImg: cat.categoryImg
                             }
                         });
                         filteredCategories.forEach((cat) => {

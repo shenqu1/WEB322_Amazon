@@ -527,14 +527,16 @@ h2 {
     margin-bottom: 0.8rem;
 }
 
-.products-table {
+.products-table,
+.category-table {
     max-width: 100%;
     overflow-x: auto;
     text-align: center;
 }
 
 
-.products-table img {
+.products-table img,
+.category-table img {
     width: 250px;
     display: block;
 }

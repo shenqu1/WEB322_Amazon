@@ -17,6 +17,35 @@
     <div class="product-links-holder">
         <a href="/product/add">Add a product</a>
     </div>
+    <div class="category-table">
+        <table border="1">
+            <thread>
+                <th>Caregory</th>
+                <th>Image</th>
+                <th>Operation</th>
+            </thread>
+            <tbody>
+                {{#each cat}}
+                <tr>
+                    <td>
+                        <span>{{this.category}}</span>
+                    </td>
+                    <td>
+                        <img src="/uploads/{{this.categoryImg}}" alt="{{this.category}}">
+                    </td>
+                    <td>
+                        <a href="/category/edit/{{this.id}}" class="edit-delete-button">Edit</a> <br><br>
+                        <a href="/category/delete/{{this.id}}?method=DELETE" class="edit-delete-button">Delete</a>
+                    </td>
+                </tr>
+                {{else}}
+                <td colspan="3">
+                    <p>No categories in the database</p>
+                </td>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
     <div class="products-table">
         <table border="1">
             <thread>
