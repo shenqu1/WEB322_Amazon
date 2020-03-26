@@ -325,6 +325,10 @@ h2 {
     padding: 0 3%;
 }
 
+.product-item img {
+    width: 100%;
+}
+
 .product-cate ul>li {
     list-style: none;
 }
@@ -515,12 +519,16 @@ h2 {
 *******************************************************************/
 
 .productDash {
-    margin-left: 3%;
-    padding: 20px 0;
+    margin: 2% 5%;
+
 }
 
 .productDash>h1 {
     margin-bottom: 1rem;
+}
+
+.product-links-holder {
+    font-size: 2rem;
 }
 
 .products-search-form {
@@ -542,23 +550,19 @@ h2 {
     cursor: pointer;
 }
 
-#product-links-holder {
-    margin-bottom: 0.8rem;
+.cat-container{
+    grid-template-columns: repeat(4, 1fr);
 }
 
-.products-table,
-.category-table {
-    max-width: 100%;
-    overflow-x: auto;
-    text-align: center;
+.cat-pro-list {
+    max-width: 1800px;
+}
+
+.delete-button {
+    padding-left: 20px;
 }
 
 
-.products-table img,
-.category-table img {
-    width: 250px;
-    display: block;
-}
 
 /******************************************************************
                                Products Description

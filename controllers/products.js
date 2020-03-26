@@ -140,6 +140,7 @@ router.get("/productDashboard", (req, res) => {
                     title: product.title,
                     category: product.category,
                     price: product.price,
+                    description: product.description,
                     productImg: product.productImg,
                     inventory: product.inventory,
                     bestSeller: product.bestSeller
