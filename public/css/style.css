@@ -491,6 +491,25 @@ h2 {
     text-decoration: none;
 }
 
+
+.userDashBoard {
+    max-width: 400px;
+    min-width: 200px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.userDashBoard img {
+    max-width: 200px;
+}
+.userProfile {
+    margin-top: 15px;
+}
+.proDashLink {
+    margin-top: 30px;
+    font-size: 2rem;
+}
 /******************************************************************
                                Products Dashboard
 *******************************************************************/
@@ -616,6 +635,20 @@ div.section>div>input {
     text-align: center;
 }
 
+.add-to-cart {
+    padding-top: 25px;
+}
+
+.inStock {
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.outStock {
+    margin-top: 10px;
+    color: #EA2027;
+    font-style: italic;
+}
 
 @media (max-width: 426px) {
     .container {

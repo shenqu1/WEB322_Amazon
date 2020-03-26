@@ -1,25 +1,19 @@
 const express = require('express');
 const router = express.Router();
+const userModel = require("../model/user");
+const path = require("path");
 
 
 router.get("/registration", (req, res) => {
-
-    const errMessage = {
-        title: `Registration Page`
-    };
     
-    res.render("user/registration", errMessage);
+    res.render("user/registration", {
+        title: "Registration"
+    });
+
 });
 
- 
-router.get("/dashboard", (req,res)=>{
-    res.render("user/dashboard", {
-        title: "Dashboard",
-        //name: errors.nameValue,
-        dash: true
-    });
-});
- router.post("/registration", (req, res) => {
+router.post("/registration", (req,res)=>{
+
     const errors = {
         title: `Registration Page`
     };
@@ -72,37 +66,80 @@ router.get("/dashboard", (req,res)=>{
     if (errors.display) {
         res.render("user/registration", errors);
     } else {
-        const dashboard = {
-            title: "Dashboard",
-            name: errors.nameValue,
-            dash: true
-        };
-        const sgMail = require('@sendgrid/mail');
-        sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
-        const msg = {
-            to: `${req.body["reg-email"]}`,
-            from: `squ7@myseneca.ca`,
-            subject: `Registration Form Submit`,
-            html: `<h1>Hi ${dashboard.name}!<br> Welcome to Amazon!</h1>
-            <p>Congratulation! You have successfully registered with Amazon!</p>
-            <p>Visit our website: <a href="https://web322-amazon-project.herokuapp.com/">https://web322-amazon-project.herokuapp.com/</a></p>`
-        };
-        sgMail.send(msg)
-            .then(() => {
-                res.render("user/dashboard", dashboard);
-            })
-            .catch(err => {
-                console.log(`Error ${err}`);
-            })
-    }
-}); 
+        const newUser = {
+            name: req.body["reg-name"].trim(),
+            email: req.body["reg-email"].trim(),
+            password: req.body["reg-password"].trim()
+        }
+        const user = new userModel(newUser);
+        user.save()
+        .then((user)=>{
+            
+            const sgMail = require('@sendgrid/mail');
+            sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
+            const msg = {
+                to: `${user.email}`,
+                from: `squ7@myseneca.ca`,
+                subject: `Registration Form Submit`,
+                html: `<h1>Hi ${user.name}!<br> Welcome to Amazon!</h1>
+                <p>Congratulation! You have successfully registered with Amazon!</p>
+                <p>Visit our website: <a href="https://web322-amazon-project.herokuapp.com/">https://web322-amazon-project.herokuapp.com/</a></p>`
+            };
+            sgMail.send(msg)
+                .then(() => {
+                    res.redirect(`/user/clerkDashboard/${user._id}`);
+                })
+                .catch(err => {
+                    console.log(`Error ${err}`);
+                });
+
+
+        })
+        .catch(err=>console.log(`Error while inserting data into database ${err}`));
+    }    
+
+});
+
+router.get("/clerkDashboard/:id", (req,res)=>{
+
+    userModel.findById(req.params.id)
+    .then((user)=>{
+        const {_id, name, userImg} = user;
+        res.render("user/clerkDashboard", {
+            title: "Clerk Dashboard",
+            _id,
+            name,
+            userImg
+        });
+    })
+    .catch(err=>console.log(`Error: ${err}`));
+
+});
+
+router.put("/profile/update/:id", (req,res)=>{
+    if(req.files) {
+    req.files.userImg.name = `user_pic_${req.params.id}${path.parse(req.files.userImg.name).ext}`;
+    req.files.userImg.mv(`public/uploads/${req.files.userImg.name}`)
+    .then(()=>{
+        userModel.updateOne({_id:req.params.id}, {
+            userImg: req.files.userImg.name
+        })
+        .then(()=>{
+            res.redirect(`/user/clerkDashboard/${req.params.id}`);
+        })
+    })
+    .catch(err=>console.log(`${err}`));
+} else {
+    res.redirect(`/user/clerkDashboard/${req.params.id}`);
+}
+});
+
 
 router.get("/login", (req, res) => {
     res.render("user/login", {
         title: `Login Page`
     });
 });
-
 
 
 router.post("/login", (req, res) => {

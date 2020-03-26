@@ -21,7 +21,7 @@
         <div class="product-item-container">
             {{#each productList}}
             <div class="product-item">
-                <a href="/productDescription"><img src="/uploads/{{this.productImg}}" alt={{this.title}}></a>
+                <a href="/productDescription/{{this.id}}"><img src="/uploads/{{this.productImg}}" alt={{this.title}}></a>
                 <p>
                     {{this.title}}<br>
                     Category: {{this.category}}<br>

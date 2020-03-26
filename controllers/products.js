@@ -432,10 +432,34 @@ router.post("/products/search", (req, res) => {
 
 });
 
-router.get("/productDescription", (req, res) => {
-    res.render("products/productDescription", {
-        title: `Product Description`
-    });
+router.get("/productDescription/:id", (req, res) => {
+    productsModel.findById(req.params.id)
+    .then((pro)=>{
+
+        const product = {
+            id: pro._id,
+            title: pro.title,
+            price: pro.price,
+            productImg: pro.productImg,
+            description: pro.description,
+            inventory: pro.inventory,
+            description: pro.description
+        }
+        if(product.inventory > 0) {
+            product.stock = "In Stock";
+            product.avalible = "inStock";
+        } else {
+            product.stock = "Out of Stock";
+            product.avalible = "outStock";
+        }
+        res.render("products/productDescription", {
+            title: `Product Description`,
+            product: product
+        });
+
+    })
+    .catch(err => console.log(`Error occoured when pulling from the database ${err}`));
+    
 });
 
 

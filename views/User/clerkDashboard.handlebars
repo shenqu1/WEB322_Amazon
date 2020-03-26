@@ -1,7 +1,15 @@
-<h1>Welcome Person</h1>
-
+<section class="userDashBoard">
+<h1>Welcome {{name}}</h1> <br>
 <!-- User Profile-->
+<img src="/uploads/{{userImg}}">
+<form  class="userProfile" method="POST" action="/user/profile/update/{{_id}}?method=PUT" enctype="multipart/form-data">
+<label>User Image Upload</label><br><br>
+<input type="file" name="userImg" id="userImg"><br>
+<input type="submit" value="Update Image">
+</form>
 
-<div>
+<div class="proDashLink">
     <a href="/productDashboard">Product Dashboard</a>
 </div>
+
+</section>
