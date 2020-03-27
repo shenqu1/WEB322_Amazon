@@ -3,30 +3,39 @@
 
 <form class="reg-form" method="POST" action="/product/add" enctype="multipart/form-data">
     <label for="title">Product Name</label> <br>
-    <input type="text" name="title" id="title"> <br>
-
+    <input type="text" {{#if errors.title}} class="red-border" {{/if}} {{#if errors.titleValue}} value="{{errors.titleValue}}" {{/if}} name="title" id="title"> <br>
+    {{#if errors.title}}
+        <p class="errors">{{errors.title}}</p>
+    {{/if}}
     <label>Category</label> <br>
     <select name="category">
         {{#each cat}}
-        <option value="{{this.category}}" >{{this.category}}</option>
+        <option value="{{this.category}}" {{#if this.show}} selected {{/if}}>{{this.category}}</option>
         {{/each}}
     </select> <br>
-
     <label for="price">Price</label> <br>
-    <input type="number" name="price" id="price" min="0.00" step="0.01"> <br>
-
+    <input type="number" {{#if errors.price}} class="red-border" {{/if}} {{#if errors.priceValue}} value="{{errors.priceValue}}" {{/if}} name="price" id="price" min="0.00" step="0.01"> <br>
+    {{#if errors.price}}
+        <p class="errors">{{errors.price}}</p>
+    {{/if}}
     <label for="inventory">Inventory</label> <br>
-    <input type="number" name="inventory" id="inventory" min="0"> <br>
-
+    <input type="number" {{#if errors.inventory}} class="red-border" {{/if}} {{#if errors.inventoryValue}} value="{{errors.inventoryValue}}" {{/if}} name="inventory" id="inventory" min="0"> <br>
+    {{#if errors.inventory}}
+        <p class="errors">{{errors.inventory}}</p>
+    {{/if}}
     <label for="description">Product Description</label><br>
-    <textarea id="description" name="description"></textarea><br>
-
+    <textarea {{#if errors.description}} class="red-border" {{/if}} id="description" name="description">{{#if errors.descriptionValue}}{{errors.descriptionValue}}{{/if}}</textarea><br>
+    {{#if errors.description}}
+        <p class="errors">{{errors.description}}</p>
+    {{/if}}
     <label for="bestSeller">BestSeller</label>
-    <input type="checkbox" id="bestSeller" name="bestSeller"> <br>
+    <input type="checkbox" {{#if errors.bestSellerValue}} checked {{/if}} id="bestSeller" name="bestSeller"> <br>
 
     <label>Product Image Upload</label> <br>
     <input type="file" name="productImg" id="productImg"> <br>
-
+    {{#if errors.files}}
+        <p class="errors">{{errors.files}}</p>
+    {{/if}}
     <input type="submit" values="Add Product">
 
 </form>

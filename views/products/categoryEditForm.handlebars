@@ -3,7 +3,10 @@
 
 <form class="reg-form" method="POST" action="/category/update/{{category.id}}?method=PUT" enctype="multipart/form-data">
     <label for="category">Category</label> <br>
-    <input type="text" name="category" id="category" value="{{category.category}}"> <br>
+    <input type="text" {{#if category.error}} class="red-border" {{/if}} name="category" id="category" value="{{category.category}}"> <br>
+    {{#if category.error}}
+        <p class="errors">{{category.error}}</p>
+    {{/if}}
 
     <label>Category Image Upload</label> <br>
     <input type="file" name="categoryImg" id="categoryImg"> <br>

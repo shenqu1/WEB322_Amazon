@@ -186,26 +186,112 @@ router.get("/product/addCategory", (req, res) => {
 });
 
 router.post("/product/addCategory", (req, res) => {
-    const newCategory = {
-        category: req.body.category
+
+    const errors = {
+        title: `Add Category`,
+        categoryValue: req.body.category
+    };
+
+    
+    if(errors.categoryValue == "") {
+        errors.category = `! Please enter category`;
+        errors.display = true;
     }
-    const category = new categoryModel(newCategory);
-    category.save()
-        .then((cat) => {
-            req.files.categoryImg.name = `cat_img_${cat._id}${path.parse(req.files.categoryImg.name).ext}`;
-            req.files.categoryImg.mv(`public/uploads/${req.files.categoryImg.name}`)
-                .then(() => {
-                    categoryModel.updateOne({
-                            _id: cat._id
-                        }, {
-                            categoryImg: req.files.categoryImg.name
-                        })
-                        .then(() => {
-                            res.redirect(`/productDashboard`);
-                        })
-                })
+
+    if(!req.files) {
+        errors.files = `! Please upload category image`;
+        errors.display = true;
+    }
+
+    if (errors.display) {
+        res.render("products/categoryAddForm", errors);
+    } else {
+        const newCategory = {
+            category: req.body.category
+        };
+        const category = new categoryModel(newCategory);
+        category.save()
+            .then((cat) => {
+                req.files.categoryImg.name = `cat_img_${cat._id}${path.parse(req.files.categoryImg.name).ext}`;
+                req.files.categoryImg.mv(`public/uploads/${req.files.categoryImg.name}`)
+                    .then(() => {
+                        categoryModel.updateOne({
+                                _id: cat._id
+                            }, {
+                                categoryImg: req.files.categoryImg.name
+                            })
+                            .then(() => {
+                                res.redirect(`/productDashboard`);
+                            })
+                    })
+            })
+            .catch(err => console.log(`Error while inserting into the database ${err}`))
+    }  
+
+});
+
+router.get("/category/edit/:id", (req,res)=>{
+    categoryModel.findById(req.params.id)
+    .then((cat)=>{
+
+        const category = {
+            id: cat._id,
+            category: cat.category
+        }
+        
+        res.render("products/categoryEditForm", {
+            title: `Edit Category`,
+            category: category
+        });
+
+    })
+    .catch(err => console.log(`Error occoured when pulling from the database ${err}`));
+});
+
+router.put("/category/update/:id", (req,res)=>{
+
+    const errors = {
+        id: req.params.id,
+        category: req.body.category
+    };
+
+    if(errors.category == "") {
+        errors.error = "! Please enter category";
+        errors.display = true;
+    }
+
+    if (errors.display) {
+        res.render(`products/categoryEditForm`, {
+            title: `Edit Category`,
+            category: errors
+        });
+    } else {
+    const category = {
+        category: req.body.category,
+    }
+    if(req.files) {
+        req.files.categoryImg.name = `cat_img_${req.params.id}${path.parse(req.files.categoryImg.name).ext}`;
+        req.files.categoryImg.mv(`public/uploads/${req.files.categoryImg.name}`)
+        .then(()=>{
+            category.categoryImg = req.files.categoryImg.name;
         })
-        .catch(err => console.log(`Error while inserting into the database ${err}`))
+        .catch(err=>console.log(`Error occured when move files ${err}`));
+    } 
+    categoryModel.updateOne({_id:req.params.id}, category)
+    .then(()=>{
+        res.redirect(`/productDashboard`);
+    })
+    .catch(err => console.log(`Error occoured when updateing to the database ${err}`));
+}
+});
+
+router.delete("/category/delete/:id", (req,res)=>{
+
+    categoryModel.deleteOne({_id:req.params.id})
+    .then(()=>{
+        res.redirect(`/productDashboard`);
+    })
+    .catch(err => console.log(`Error occoured when deleting from the database ${err}`));
 
 });
 
@@ -229,6 +315,64 @@ router.get("/product/add", (req, res) => {
 });
 
 router.post("/product/add", (req, res) => {
+
+    categoryModel.find()
+    .then((categories) => {
+        const filteredCategories = categories.map((cat) => {
+            return {
+                id: cat._id,
+                category: cat.category
+            }
+        });
+    
+
+    const errors = {
+        titleValue: req.body.title,
+        categoryValue: req.body.category,
+        priceValue: req.body.price,
+        inventoryValue: req.body.inventory,
+        descriptionValue: req.body.description,
+        bestSellerValue: (req.body.bestSeller ? true : false)
+    };
+
+    filteredCategories.forEach((cat)=>{
+        if(errors.categoryValue == cat.category) {
+            cat.show = true;
+        }
+    });
+
+    if(errors.titleValue == "") {
+        errors.title = "! Please enter product name";
+        errors.display = true;
+    }
+
+    if(errors.priceValue == "") {
+        errors.price = "! Please enter product price";
+        errors.display = true;
+    }
+    if(errors.inventoryValue == "") {
+        errors.inventory = "! Please enter product inventory";
+        errors.display = true;
+    }
+
+    if(errors.descriptionValue == "") {
+        errors.description = "! Please enter product description";
+        errors.display = true;
+    }
+
+    if(!req.files) {
+        errors.files = "! Please upload product image";
+        errors.display = true;
+    }
+
+    if (errors.display) {
+        res.render("products/productAddForm", {
+            title: `Add Products`,
+            cat: filteredCategories,
+            errors: errors
+        });
+    } else {
+
     const newProduct = {
         title: req.body.title,
         category: req.body.category,
@@ -254,7 +398,9 @@ router.post("/product/add", (req, res) => {
                 })
         })
         .catch(err => console.log(`Error while inserting into the database ${err}`))
-
+    }
+})
+.catch(err => console.log(`Error occoured when pulling from the database ${err}`));
 });
 
 router.get("/product/edit/:id", (req,res)=>{
@@ -301,6 +447,58 @@ router.get("/product/edit/:id", (req,res)=>{
 
 router.put("/product/update/:id", (req,res)=>{
 
+    categoryModel.find()
+    .then((categories) => {
+        const filteredCategories = categories.map((cat) => {
+            return {
+                id: cat._id,
+                category: cat.category
+            }
+        });
+
+    const errors = {
+        id: req.params.id,
+        title: req.body.title,
+        category: req.body.category,
+        price: req.body.price,
+        inventory: req.body.inventory,
+        description: req.body.description,
+        bestSeller: (req.body.bestSeller ? true : false)
+    };
+
+    filteredCategories.forEach((cat)=>{
+        if(errors.category == cat.category) {
+            cat.show = true;
+        }
+    });
+
+    if(errors.title == "") {
+        errors.titleError = "! Please enter product name";
+        errors.display = true;
+    }
+
+    if(errors.price == "") {
+        errors.priceError = "! Please enter product price";
+        errors.display = true;
+    }
+    if(errors.inventory == "") {
+        errors.inventoryError = "! Please enter product inventory";
+        errors.display = true;
+    }
+
+    if(errors.description == "") {
+        errors.descriptionError = "! Please enter product description";
+        errors.display = true;
+    }
+
+    if (errors.display) {
+        res.render(`products/productEditForm`, {
+            title: `Edit Category`,
+            cat: filteredCategories,
+            product: errors
+        });
+    } else{
+
     const product = {
         title: req.body.title,
         category: req.body.category,
@@ -322,6 +520,9 @@ router.put("/product/update/:id", (req,res)=>{
         res.redirect(`/productDashboard`);
     })
     .catch(err => console.log(`Error occoured when updateing to the database ${err}`));
+}
+    })
+    .catch(err => console.log(`Error occoured when pulling from the database ${err}`));
 });
 
 router.delete("/product/delete/:id", (req,res)=>{
@@ -334,53 +535,7 @@ router.delete("/product/delete/:id", (req,res)=>{
 
 });
 
-router.get("/category/edit/:id", (req,res)=>{
-    categoryModel.findById(req.params.id)
-    .then((cat)=>{
 
-        const category = {
-            id: cat._id,
-            category: cat.category
-        }
-        
-        res.render("products/categoryEditForm", {
-            title: `Edit Category`,
-            category: category
-        });
-
-    })
-    .catch(err => console.log(`Error occoured when pulling from the database ${err}`));
-});
-
-router.put("/category/update/:id", (req,res)=>{
-
-    const category = {
-        category: req.body.category,
-    }
-    if(req.files) {
-        req.files.categoryImg.name = `cat_img_${req.params.id}${path.parse(req.files.categoryImg.name).ext}`;
-        req.files.categoryImg.mv(`public/uploads/${req.files.categoryImg.name}`)
-        .then(()=>{
-            category.categoryImg = req.files.categoryImg.name;
-        })
-        .catch(err=>console.log(`Error occured when move files ${err}`));
-    } 
-    categoryModel.updateOne({_id:req.params.id}, category)
-    .then(()=>{
-        res.redirect(`/productDashboard`);
-    })
-    .catch(err => console.log(`Error occoured when updateing to the database ${err}`));
-});
-
-router.delete("/category/delete/:id", (req,res)=>{
-
-    categoryModel.deleteOne({_id:req.params.id})
-    .then(()=>{
-        res.redirect(`/productDashboard`);
-    })
-    .catch(err => console.log(`Error occoured when deleting from the database ${err}`));
-
-});
 
 
 

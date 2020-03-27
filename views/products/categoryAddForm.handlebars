@@ -3,10 +3,16 @@
 
 <form class="reg-form" method="POST" action="/product/addCategory" enctype="multipart/form-data">
     <label for="category">Category</label> <br>
-    <input type="text" name="category" id="category"> <br>
-
+    <input type="text" {{#if this.category}} class="red-border" {{/if}} {{#if this.categoryValue}}
+            value="{{this.categoryValue}}" {{/if}} name="category" id="category"> <br>
+    {{#if this.category}}
+        <p class="errors">{{this.category}}</p>
+    {{/if}}
     <label>Category Image Upload</label> <br>
     <input type="file" name="categoryImg" id="categoryImg"> <br>
+    {{#if this.files}}
+        <p class="errors">{{this.files}}</p>
+    {{/if}}
 
     <input type="submit" values="Add Category">
 
