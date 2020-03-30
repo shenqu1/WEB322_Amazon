@@ -33,7 +33,11 @@
     <input type="checkbox" id="bestSeller" name="bestSeller" {{#if product.bestSeller}} checked {{/if}}> <br>
 
     <label>Product Image Upload</label> <br>
-    <input type="file" name="productImg" id="productImg"> <br>
+    <input type="file" name="productImg" id="productImg"> 
+    {{#if product.files}}
+        <p class="errors">{{product.files}}</p>
+    {{/if}}
+    <br>
 
     <input type="submit" values="Update Product">
 

@@ -5,8 +5,12 @@
 <form  class="userProfile" method="POST" action="/user/profile/update/{{_id}}?method=PUT" enctype="multipart/form-data">
 <label>User Image Upload</label><br><br>
 <input type="file" name="userImg" id="userImg"><br>
-<input type="submit" value="Update Image">
+{{#if error}}
+    <p class="errors">{{error}}</p>
+{{/if}}
+<input type="submit" value="Update Image"><br>
 </form>
+
 
 <div class="proDashLink">
     <a href="/productDashboard">Product Dashboard</a>

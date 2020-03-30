@@ -354,17 +354,6 @@ h2 {
     border-bottom: 1px solid black;
 }
 
-.cate-nav {
-    color: #333;
-    font-size: 30px;
-    cursor: pointer;
-    display: none;
-}
-
-#cate-nav {
-    display: none;
-}
-
 .product-item-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -710,64 +699,16 @@ div.section>div>input {
 /******************************************************************
                                 Shopping Cart
 *******************************************************************/
-
-.table>tbody>tr>td,
-.table>tfoot>tr>td {
-    vertical-align: middle;
+.container button{
+    max-width: 200px;
+    white-space: normal;
+    float: right;
 }
-
-@media screen and (max-width: 600px) {
-    table#cart tbody td .quanty-form {
-        display: inline !important;
-    }
-
-    .actions .btn {
-        width: 36%;
-        margin: 1.5em 0;
-    }
-
-    .actions .btn-info {
-        float: left;
-    }
-
-    .actions .btn-danger {
-        float: right;
-    }
-
-    table#cart thead {
-        display: none;
-    }
-
-    table#cart tbody td {
-        display: block;
-        padding: .6rem;
-        min-width: 320px;
-    }
-
-    table#cart tbody tr td:first-child {
-        background: #333;
-        color: #fff;
-    }
-
-    table#cart tbody td:before {
-        content: attr(data-th);
-        font-weight: bold;
-        display: inline-block;
-        width: 8rem;
-    }
-
-
-
-    table#cart tfoot td {
-        display: block;
-    }
-
-    table#cart tfoot td .btn {
-        display: block;
-    }
-
+.glyphicon-trash{
+    font-size: 1rem;
+    padding-top: 10px;
+    color: #EA2027;
 }
-
 /******************************************************************
                                 Responsive
 *******************************************************************/
@@ -829,37 +770,18 @@ div.section>div>input {
         right: 0;
     }
 
-    .cate-nav {
-        display: block;
-    }
-
     .cate-responsive {
-        position: absolute;
-        width: 30%;
-        height: 350px;
-        background-color: #ced6e0;
-        top: 130px;
-        left: -100%;
-        text-align: center;
-        transition: all .5s;
+        display: none;
     }
-
-    #cate-nav:checked~ul {
-        left: 0;
-    }
-
-    .cate-title {
-        font-size: 1.2rem;
-    }
-
-
-    .cate-list li>a {
-        font-size: 0.8rem;
+    
+    .products-select {
+        padding: 0.2rem;
     }
 
     nav ul li {
         display: block;
         padding: 10px 10px;
+        font-size: 0.5rem;
     }
 
     .footer-top {

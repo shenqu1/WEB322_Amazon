@@ -9,7 +9,11 @@
     {{/if}}
 
     <label>Category Image Upload</label> <br>
-    <input type="file" name="categoryImg" id="categoryImg"> <br>
+    <input type="file" name="categoryImg" id="categoryImg"> 
+    {{#if category.files}}
+        <p class="errors">{{category.files}}</p>
+    {{/if}}
+    <br>
 
     <input type="submit" values="Add Category">
 

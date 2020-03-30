@@ -117,7 +117,22 @@ router.get("/clerkDashboard/:id", (req,res)=>{
 });
 
 router.put("/profile/update/:id", (req,res)=>{
-    if(req.files) {
+
+    if(req.files && !req.files.userImg.mimetype.includes("image")){
+
+        userModel.findById(req.params.id)
+        .then((user)=>{
+        const {_id, name, userImg} = user;
+        res.render("user/clerkDashboard", {
+            title: "Clerk Dashboard",
+            _id,
+            name,
+            userImg,
+            error: "! Only image file type allowed"
+        });
+    })
+    .catch(err=>console.log(`Error: ${err}`));
+    }else if(req.files) {
     req.files.userImg.name = `user_pic_${req.params.id}${path.parse(req.files.userImg.name).ext}`;
     req.files.userImg.mv(`public/uploads/${req.files.userImg.name}`)
     .then(()=>{

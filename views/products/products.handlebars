@@ -1,9 +1,5 @@
 <section class="products">
     <div class="product-cate">
-        <input type="checkbox" id="cate-nav">
-        <label for="cate-nav" class="cate-nav">
-            <i class="fas fa-bars"></i>
-        </label>
         <ul class="cate-responsive">
             <li class="cate-title">
                 <span>Category</span>
@@ -17,11 +13,22 @@
         </ul>
     </div>
     <div class="product-list">
+        <form class="products-search-form" method="POST" action="/products/productsPage/search">
+            <label>Search By</label>
+            <select class="products-select" name="products-search">
+                <option value="all">All Products</option>
+                {{#each cat}}
+                <option value="{{this.category}}" {{#if this.select}} selected {{/if}}>{{this.category}}</option>
+                {{/each}}
+            </select>
+            <input class="product-search-button" type="submit" value="Search">
+        </form>
         <h2>Product List: </h2>
         <div class="product-item-container">
             {{#each productList}}
             <div class="product-item">
-                <a href="/productDescription/{{this.id}}"><img src="/uploads/{{this.productImg}}" alt={{this.title}}></a>
+                <a href="/productDescription/{{this.id}}"><img src="/uploads/{{this.productImg}}"
+                        alt={{this.title}}></a>
                 <p>
                     {{this.title}}<br>
                     Category: {{this.category}}<br>

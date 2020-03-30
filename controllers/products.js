@@ -88,6 +88,53 @@ router.get("/products", (req, res) => {
 
 });
 
+router.post("/products/productsPage/search", (req, res) => {
+    const search = req.body["products-search"];
+    if (search == "all") {
+        res.redirect("/products");
+    } else {
+        productsModel.find({
+                category: search
+            })
+            .then((products) => {
+                const filteredProducts = products.map(product => {
+                    return {
+                        id: product._id,
+                        title: product.title,
+                        category: product.category,
+                        price: product.price,
+                        productImg: product.productImg,
+                    }
+                });
+                categoryModel.find()
+                    .then((categories) => {
+                        const filteredCategories = categories.map((cat) => {
+                            return {
+                                id: cat._id,
+                                category: cat.category,
+                                categoryImg: cat.categoryImg
+                            }
+                        });
+                        filteredCategories.forEach((cat) => {
+                            if (search == cat.category) {
+                                cat.select = true;
+                                cat.show = true;
+                            }
+                        });
+
+                        res.render("products/products", {
+                            title: "Product List",
+                            productList: filteredProducts,
+                            cat: filteredCategories
+                        });
+
+                    })
+            })
+            .catch(err => console.log(`Error occoured when pulling from the database ${err}`));
+    }
+
+});
+
 router.get("/category/:id", (req,res)=>{
     
     categoryModel.find()
@@ -102,6 +149,7 @@ router.get("/category/:id", (req,res)=>{
         filteredCategories.forEach((cat)=>{
             if (cat.id == req.params.id) {
                 category = cat;
+                cat.select = true;
                 cat.show = true;
             }
         });
@@ -201,6 +249,9 @@ router.post("/product/addCategory", (req, res) => {
     if(!req.files) {
         errors.files = `! Please upload category image`;
         errors.display = true;
+    }else if(!req.files.categoryImg.mimetype.includes("image")){
+        errors.files = "! Only image file type allowed";
+        errors.display = true;
     }
 
     if (errors.display) {
@@ -257,6 +308,11 @@ router.put("/category/update/:id", (req,res)=>{
 
     if(errors.category == "") {
         errors.error = "! Please enter category";
+        errors.display = true;
+    }
+
+    if(req.files && !req.files.categoryImg.mimetype.includes("image")){
+        errors.files = "! Only image file type allowed";
         errors.display = true;
     }
 
@@ -363,7 +419,12 @@ router.post("/product/add", (req, res) => {
     if(!req.files) {
         errors.files = "! Please upload product image";
         errors.display = true;
+    }else if(!req.files.productImg.mimetype.includes("image")){
+        errors.files = "! Only image file type allowed";
+        errors.display = true;
     }
+
+    
 
     if (errors.display) {
         res.render("products/productAddForm", {
@@ -490,6 +551,10 @@ router.put("/product/update/:id", (req,res)=>{
         errors.descriptionError = "! Please enter product description";
         errors.display = true;
     }
+    if(req.files && !req.files.productImg.mimetype.includes("image")){
+        errors.files = "! Only image file type allowed";
+        errors.display = true;
+    }
 
     if (errors.display) {
         res.render(`products/productEditForm`, {
@@ -577,8 +642,7 @@ router.post("/products/search", (req, res) => {
                         res.render("products/productDashboard", {
                             title: "Product Dashboard",
                             productList: filteredProducts,
-                            cat: filteredCategories,
-                            search: search
+                            cat: filteredCategories
                         });
 
                     })
