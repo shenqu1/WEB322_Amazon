@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userModel = require("../model/user");
 const path = require("path");
+const bcrypt = require('bcryptjs');
 
 
 router.get("/registration", (req, res) => {
@@ -19,9 +20,9 @@ router.post("/registration", (req,res)=>{
     };
 
     errors.nameValue = req.body["reg-name"].trim();
-    errors.emailValue = req.body["reg-email"].trim();
-    errors.passwordValue = req.body["reg-password"].trim();
-    errors.passwordMatch = req.body["password-confirm"].trim();
+    errors.emailValue = req.body["reg-email"];
+    errors.passwordValue = req.body["reg-password"];
+    errors.passwordMatch = req.body["password-confirm"];
 
     if (errors.nameValue == "") {
         errors.name = `! Please enter your name`;
@@ -63,6 +64,14 @@ router.post("/registration", (req,res)=>{
         errors.match = `! Password doesn't match`
         errors.display = true;
     }
+
+    userModel.findOne({email:errors.emailValue})
+    .then((user)=>{
+        if(user) {
+            errors.email = `! Email already exists`;
+            errors.display = true;
+        }
+
     if (errors.display) {
         res.render("user/registration", errors);
     } else {
@@ -87,7 +96,7 @@ router.post("/registration", (req,res)=>{
             };
             sgMail.send(msg)
                 .then(() => {
-                    res.redirect(`/user/clerkDashboard/${user._id}`);
+                    res.redirect(`/user/dashboard/${user._id}`);
                 })
                 .catch(err => {
                     console.log(`Error ${err}`);
@@ -97,19 +106,19 @@ router.post("/registration", (req,res)=>{
         })
         .catch(err=>console.log(`Error while inserting data into database ${err}`));
     }    
+})
+.catch(err=>console.log(`Error ${err}`));
 
 });
 
-router.get("/clerkDashboard/:id", (req,res)=>{
+router.get("/dashboard/:id", (req,res)=>{
 
     userModel.findById(req.params.id)
     .then((user)=>{
-        const {_id, name, userImg} = user;
-        res.render("user/clerkDashboard", {
-            title: "Clerk Dashboard",
-            _id,
-            name,
-            userImg
+        const {name} = user;
+        res.render("user/dashboard", {
+            title: "user Dashboard",
+            name
         });
     })
     .catch(err=>console.log(`Error: ${err}`));
@@ -140,12 +149,12 @@ router.put("/profile/update/:id", (req,res)=>{
             userImg: req.files.userImg.name
         })
         .then(()=>{
-            res.redirect(`/user/clerkDashboard/${req.params.id}`);
+            res.redirect("/user/profile");
         })
     })
     .catch(err=>console.log(`${err}`));
 } else {
-    res.redirect(`/user/clerkDashboard/${req.params.id}`);
+    res.redirect("/user/profile");
 }
 });
 
@@ -161,33 +170,39 @@ router.post("/login", (req, res) => {
     const errors = {
         title: `Login Page`,
     };
-    errors.emailValue = req.body["log-email"].trim();
-    errors.passwordValue = req.body["log-password"].trim();
+    errors.emailValue = req.body["log-email"];
+    errors.passwordValue = req.body["log-password"];
 
-    if (errors.emailValue == "") {
-        errors.email = `! Please enter email`;
-        errors.display = true;
-    } else if (/\s/.test(errors.emailValue)) {
-        errors.email = `! Can not contain whitespace`;
-        errors.display = true;
-    }
+    userModel.findOne({email:errors.emailValue})
+    .then((user)=>{
+        
+        if(!user) {
+            errors.email = "! Incorrect email";
+            res.render("user/login", errors);
+        } else {
 
-    if (errors.passwordValue == "") {
-        errors.password = `! Please enter password`;
-        errors.display = true;
-    } else if (/\s/.test(errors.passwordValue)) {
-        errors.password = `! Can not contain whitespace`;
-        errors.display = true;
-    }
+            bcrypt.compare(errors.passwordValue, user.password)
+            .then((isMatched)=>{
 
-    if (errors.display) {
-        res.render("user/login", errors);
-    } else {
-        res.render("user/clerkDashboard", {
-            title: `Clerk Dashboard`
-        });
-    }
+                if(isMatched) {
+                    req.session.userInfo = user;
+                    res.redirect("/user/profile");
+                } else {
+                    errors.password = "! Incorrect password";
+                    res.render("user/login", errors);
+                }
+            })
+
+        }
+})
+    .catch(err=>console.log(`Error ${err}`));
 
 }); 
+
+router.get("/profile", (req,res)=>{
+    res.render("user/clerkDashboard", {
+        title: "User Profile"
+    });
+});
 
 module.exports = router;

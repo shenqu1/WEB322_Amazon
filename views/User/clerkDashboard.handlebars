@@ -1,8 +1,8 @@
 <section class="userDashBoard">
-<h1>Welcome {{name}}</h1> <br>
+<h1>Welcome {{user.name}}</h1> <br>
 <!-- User Profile-->
-<img src="/uploads/{{userImg}}">
-<form  class="userProfile" method="POST" action="/user/profile/update/{{_id}}?method=PUT" enctype="multipart/form-data">
+<img src="/uploads/{{user.userImg}}">
+<form  class="userProfile" method="POST" action="/user/profile/update/{{user._id}}?method=PUT" enctype="multipart/form-data">
 <label>User Image Upload</label><br><br>
 <input type="file" name="userImg" id="userImg"><br>
 {{#if error}}

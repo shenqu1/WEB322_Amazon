@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
+const session = require('express-session');
 
 
 require('dotenv').config({path:"./config/keys.env"});
@@ -36,6 +37,14 @@ app.use((req,res,next)=>{
 });
 
 app.use(fileUpload());
+
+app.use(session({secret: `${process.env.SECRET}`}));
+
+app.use((req,res,next)=>{
+    res.locals.user = req.session.userInfo;
+
+    next();
+});
 
 app.use("/", productController);
 app.use("/user", userController);
