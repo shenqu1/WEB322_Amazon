@@ -205,4 +205,9 @@ router.get("/profile", (req,res)=>{
     });
 });
 
+router.get("/logout", (req,res)=>{
+    req.session.destroy();
+    res.redirect("/user/login");
+});
+
 module.exports = router;

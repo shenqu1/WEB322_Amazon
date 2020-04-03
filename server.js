@@ -38,7 +38,7 @@ app.use((req,res,next)=>{
 
 app.use(fileUpload());
 
-app.use(session({secret: `${process.env.SECRET}`}));
+app.use(session({secret: `${process.env.SECRET}`, resave: false, saveUninitialized: true}));
 
 app.use((req,res,next)=>{
     res.locals.user = req.session.userInfo;
