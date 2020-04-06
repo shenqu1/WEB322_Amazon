@@ -10,8 +10,8 @@
 							</div>
 							<div class="col-md-6">
 								<a href="/products"><button type="button" class="btn btn-primary btn-sm btn-block">
-									<span class="glyphicon glyphicon-share-alt"></span> Continue shopping
-								</button></a>
+										<span class="glyphicon glyphicon-share-alt"></span> Continue shopping
+									</button></a>
 							</div>
 						</div>
 					</div>
@@ -25,7 +25,8 @@
 						<div class="col-md-2"><img class="img-responsive" src="/uploads/{{this.productImg}}">
 						</div>
 						<div class="col-md-5">
-							<h4 class="product-name"><strong>{{this.productName}}</strong></h4><h4><small>{{this.description}}</small></h4>
+							<h4 class="product-name"><strong>{{this.productName}}</strong></h4>
+							<h4><small>{{this.description}}</small></h4>
 						</div>
 						<div class="col-md-5">
 							<div class="col-md-6 text-right">
@@ -48,7 +49,7 @@
 					{{/each}}
 					{{/if}}
 					<hr>
-					
+
 				</div>
 				<div class="panel-footer">
 					<form class="row text-center" method="POST" action="/order/checkOut?method=DELETE">

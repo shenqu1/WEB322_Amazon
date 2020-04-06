@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const productsModel = require("../model/product");
 const orderModel = require("../model/order");
+const isAuthenticated = require("../middleware/authentication");
 
-router.post("/addToCart/:id", (req, res) => {
+router.post("/addToCart/:id", isAuthenticated, (req, res) => {
     productsModel.findById(req.params.id)
         .then((pro) => {
             const product = {
@@ -34,7 +35,7 @@ router.post("/addToCart/:id", (req, res) => {
                                 }, {
                                     quantity: qty
                                 })
-                                .then(()=>{
+                                .then(() => {
                                     res.redirect("/order/shoppingCart");
                                 })
                                 .catch(err => console.log(`${err}`));
@@ -59,7 +60,7 @@ router.post("/addToCart/:id", (req, res) => {
                             }
                             const order = new orderModel(newOrder);
                             order.save()
-                                .then(()=>{
+                                .then(() => {
                                     res.redirect("/order/shoppingCart");
                                 })
                                 .catch(err => console.log(`${err}`));
@@ -73,7 +74,7 @@ router.post("/addToCart/:id", (req, res) => {
         .catch(err => console.log(`${err}`));
 });
 
-router.get("/shoppingCart", (req, res) => {
+router.get("/shoppingCart", isAuthenticated, (req, res) => {
 
 
     orderModel.find({
@@ -107,7 +108,7 @@ router.get("/shoppingCart", (req, res) => {
         .catch(err => console.log(`${err}`));
 });
 
-router.delete("/order/delete/:id", (req, res) => {
+router.delete("/order/delete/:id", isAuthenticated, (req, res) => {
 
     orderModel.deleteOne({
             _id: req.params.id
@@ -119,7 +120,7 @@ router.delete("/order/delete/:id", (req, res) => {
 
 });
 
-router.delete("/checkOut", (req, res) => {
+router.delete("/checkOut", isAuthenticated, (req, res) => {
 
     let error = false;
     let total = 0;
@@ -150,20 +151,20 @@ router.delete("/checkOut", (req, res) => {
                         }
                     });
 
-                    if(filterorders.length > 0) {
-                        for(let i = 0; i < filterorders.length; i++) {
+                    if (filterorders.length > 0) {
+                        for (let i = 0; i < filterorders.length; i++) {
                             total += filterorders[i].price * filterorders[i].quantity;
-                            for(let j = 0; j < filteredProducts.length; j++) {
-                                if(filterorders[i].productId == filteredProducts[j].id) {
+                            for (let j = 0; j < filteredProducts.length; j++) {
+                                if (filterorders[i].productId == filteredProducts[j].id) {
                                     filterorders[i].inventory = filteredProducts[j].inventory;
-                                    if(filterorders[i].quantity > filteredProducts[j].inventory) {
+                                    if (filterorders[i].quantity > filteredProducts[j].inventory) {
                                         error = true;
                                         filterorders[i].errorMessage = "Not Enough Inventory!";
                                     }
                                 }
                             }
                         }
-                        if(error) {
+                        if (error) {
                             res.render("order/shoppingCart", {
                                 title: `Shopping Cart`,
                                 orders: filterorders,
@@ -172,38 +173,42 @@ router.delete("/checkOut", (req, res) => {
                             });
                         } else {
                             let record = "";
-                            filterorders.forEach((order)=>{
+                            filterorders.forEach((order) => {
                                 record += `<p>${order.productName}: $${order.price}*${order.quantity}</p><hr>`
-                               productsModel.updateOne({_id: order.productId}, {
-                                   inventory: order.inventory - order.quantity
-                               })
-                               .then()
-                               .catch(err=>console.log(`${err}`));
+                                productsModel.updateOne({
+                                        _id: order.productId
+                                    }, {
+                                        inventory: order.inventory - order.quantity
+                                    })
+                                    .then()
+                                    .catch(err => console.log(`${err}`));
                             });
-                            orderModel.deleteMany({userId: req.session.userInfo._id})
-                            .then(()=>{
-                                record += `<p>Total: $${Math.floor((total + 0.005) * 100) / 100}</p>`
-                                const sgMail = require('@sendgrid/mail');
-                                sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
-                                const msg = {
-                                    to: `${req.session.userInfo.email}`,
-                                    from: `squ7@myseneca.ca`,
-                                    subject: `Registration Form Submit`,
-                                    html: `<h1>Hi ${req.session.userInfo.name}!<br> Congratulations!</h1>
+                            orderModel.deleteMany({
+                                    userId: req.session.userInfo._id
+                                })
+                                .then(() => {
+                                    record += `<p>Total: $${Math.floor((total + 0.005) * 100) / 100}</p>`
+                                    const sgMail = require('@sendgrid/mail');
+                                    sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
+                                    const msg = {
+                                        to: `${req.session.userInfo.email}`,
+                                        from: `squ7@myseneca.ca`,
+                                        subject: `Registration Form Submit`,
+                                        html: `<h1>Hi ${req.session.userInfo.name}!<br> Congratulations!</h1>
                                     <p> You have successfully puchased:</p>
                                     ${record}
                                     <p>Visit our website: <a href="https://web322-amazon-project.herokuapp.com/">https://web322-amazon-project.herokuapp.com/</a></p>`
-                                };
-                                sgMail.send(msg)
-                                    .then(() => {
-                                        res.redirect("/order/shoppingCart");
-                                    })
-                                    .catch(err => {
-                                        console.log(`Error ${err}`);
-                                    });
-                    
-                            })
-                            .catch(err=>console.log(`${err}`));
+                                    };
+                                    sgMail.send(msg)
+                                        .then(() => {
+                                            res.redirect("/order/shoppingCart");
+                                        })
+                                        .catch(err => {
+                                            console.log(`Error ${err}`);
+                                        });
+
+                                })
+                                .catch(err => console.log(`${err}`));
                         }
                     }
 

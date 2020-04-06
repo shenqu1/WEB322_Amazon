@@ -1,5 +1,5 @@
 <section class="userDashBoard">
-    <h1>Welcome Admin {{user.name}}</h1> <br>
+    <h1>Welcome {{user.name}}</h1> <br>
     <!-- User Profile-->
     <img src="/uploads/{{user.userImg}}">
     <form class="userProfile" method="POST" action="/user/profile/update/{{user._id}}?method=PUT"
@@ -11,10 +11,5 @@
         {{/if}}
         <input type="submit" value="Update Image"><br>
     </form>
-
-
-    <div class="proDashLink">
-        <a href="/productDashboard">Product Dashboard</a>
-    </div>
 
 </section>

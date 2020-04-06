@@ -17,28 +17,28 @@
     </div>
     <div class="cat-pro-list">
         <h2>Category List: </h2>
-    <div class="product-item-container cat-container">
-        {{#each cat}}
-        <div class="product-item">
-            <img src="/uploads/{{this.categoryImg}}" alt={{this.category}}>
-            <p>
-                Category: {{this.category}}<br>
-                <a href="/category/edit/{{this.id}}">Edit</a>
-            <a href="/category/delete/{{this.id}}?method=DELETE" class="delete-button">Delete</a>
-            </p>
-            
+        <div class="product-item-container cat-container">
+            {{#each cat}}
+            <div class="product-item">
+                <img src="/uploads/{{this.categoryImg}}" alt={{this.category}}>
+                <p>
+                    Category: {{this.category}}<br>
+                    <a href="/category/edit/{{this.id}}">Edit</a>
+                    <a href="/category/delete/{{this.id}}?method=DELETE" class="delete-button">Delete</a>
+                </p>
+
+            </div>
+            {{/each}}
         </div>
-        {{/each}}
-    </div>
     </div>
 
     <div class="cat-pro-list">
         <h2>Product List: </h2>
-    <div class="product-item-container">
-        {{#each productList}}
-        <div class="product-item">
-            <img src="/uploads/{{this.productImg}}" alt={{this.title}}>
-            <p>
+        <div class="product-item-container">
+            {{#each productList}}
+            <div class="product-item">
+                <img src="/uploads/{{this.productImg}}" alt={{this.title}}>
+                <p>
                     Title: {{this.title}}<br>
                     Category: {{this.category}}<br>
                     Description: {{this.description}}<br>
@@ -47,11 +47,11 @@
                     Bestseller: {{this.bestSeller}}<br>
                     <a href="/product/edit/{{this.id}}">Edit</a>
                     <a href="/product/delete/{{this.id}}?method=DELETE" class="delete-button">Delete</a>
-            </p>
-            
+                </p>
+
+            </div>
+            {{/each}}
         </div>
-        {{/each}}
-    </div>
     </div>
 
 </section>

@@ -208,7 +208,7 @@ nav>ul>li>a:focus,
 #sub-button {
     padding: 0.3em;
     border-radius: 5px;
-    color:#535c68;
+    color: #535c68;
 }
 
 #sub-button:hover,
@@ -502,13 +502,16 @@ h2 {
 .userDashBoard img {
     max-width: 200px;
 }
+
 .userProfile {
     margin-top: 15px;
 }
+
 .proDashLink {
     margin-top: 30px;
     font-size: 2rem;
 }
+
 /******************************************************************
                                Products Dashboard
 *******************************************************************/
@@ -545,7 +548,7 @@ h2 {
     cursor: pointer;
 }
 
-.cat-container{
+.cat-container {
     grid-template-columns: repeat(4, 1fr);
 }
 
@@ -646,7 +649,7 @@ div.section>input {
         padding-left: 10px !important;
 
     }
-    
+
     div.section>input {
         padding-left: 2px;
         font-size: 12px;
@@ -654,28 +657,32 @@ div.section>input {
         max-width: 80%;
 
     }
+
     .section {
         width: 100%;
-        padding-bottom:20px;
+        padding-bottom: 20px;
     }
+
     .glyphicon-shopping-cart {
-        display:none;
+        display: none;
     }
 }
 
 /******************************************************************
                                 Shopping Cart
 *******************************************************************/
-.shopping-cart button{
+.shopping-cart button {
     max-width: 200px;
     white-space: normal;
     float: right;
 }
-.glyphicon-trash{
+
+.glyphicon-trash {
     font-size: 1rem;
     padding-top: 10px;
     color: #EA2027;
 }
+
 /******************************************************************
                                 Responsive
 *******************************************************************/
@@ -740,7 +747,7 @@ div.section>input {
     .cate-responsive {
         display: none;
     }
-    
+
     .products-select {
         padding: 0.2rem;
     }

@@ -3,46 +3,39 @@ const Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
 
-  userId:
-  {
-      type:String,
-      required:true
-  },
-  productId:{
-    type:String,
+  userId: {
+    type: String,
     required: true
   },
-  productName:
-  {
-      type:String,
-      required:true
+  productId: {
+    type: String,
+    required: true
   },
-  price:
-  {
-      type: Number,
-      required: true
+  productName: {
+    type: String,
+    required: true
   },
-  quantity:
-  {
+  price: {
     type: Number,
     required: true
   },
-  description:
-  {
+  quantity: {
+    type: Number,
+    required: true
+  },
+  description: {
     type: String,
     requires: true
   },
-  productImg:
-  {
+  productImg: {
     type: String
   },
-  dataCreated:
-  {
-      type:Date,
-      default:Date.now()
+  dataCreated: {
+    type: Date,
+    default: Date.now()
   }
 });
 
 const order = mongoose.model('Order', orderSchema);
 
-module.exports=order;
+module.exports = order;

@@ -1,46 +1,51 @@
 <section class="infoForm">
-<h1> Edit Product</h1>
+    <h1> Edit Product</h1>
 
-<form class="reg-form" method="POST" action="/product/update/{{product.id}}?method=PUT" enctype="multipart/form-data">
-    <label for="title">Product Name</label> <br>
-    <input type="text" {{#if product.titleError}} class="red-border" {{/if}} name="title" id="title" value="{{product.title}}"> <br>
-    {{#if product.titleError}}
+    <form class="reg-form" method="POST" action="/product/update/{{product.id}}?method=PUT"
+        enctype="multipart/form-data">
+        <label for="title">Product Name</label> <br>
+        <input type="text" {{#if product.titleError}} class="red-border" {{/if}} name="title" id="title"
+            value="{{product.title}}"> <br>
+        {{#if product.titleError}}
         <p class="errors">{{product.titleError}}</p>
-    {{/if}}
-    <label>Category</label> <br>
-    <select name="category">
-        {{#each cat}}
-        <option value="{{this.category}}" {{#if this.show}} selected {{/if}}>{{this.category}}</option>
-        {{/each}}
-    </select> <br>
+        {{/if}}
+        <label>Category</label> <br>
+        <select name="category">
+            {{#each cat}}
+            <option value="{{this.category}}" {{#if this.show}} selected {{/if}}>{{this.category}}</option>
+            {{/each}}
+        </select> <br>
 
-    <label for="price">Price</label> <br>
-    <input type="number" {{#if product.priceError}} class="red-border" {{/if}} name="price" id="price" min="0.00" step="0.01" value="{{product.price}}"> <br>
-    {{#if product.priceError}}
+        <label for="price">Price</label> <br>
+        <input type="number" {{#if product.priceError}} class="red-border" {{/if}} name="price" id="price" min="0.00"
+            step="0.01" value="{{product.price}}"> <br>
+        {{#if product.priceError}}
         <p class="errors">{{product.priceError}}</p>
-    {{/if}}
-    <label for="inventory">Inventory</label> <br>
-    <input type="number" {{#if product.inventoryError}} class="red-border" {{/if}} name="inventory" id="inventory" min="0" value="{{product.inventory}}"> <br>
-    {{#if product.inventoryError}}
+        {{/if}}
+        <label for="inventory">Inventory</label> <br>
+        <input type="number" {{#if product.inventoryError}} class="red-border" {{/if}} name="inventory" id="inventory"
+            min="0" value="{{product.inventory}}"> <br>
+        {{#if product.inventoryError}}
         <p class="errors">{{product.inventoryError}}</p>
-    {{/if}}
-    <label for="description">Product Description</label><br>
-    <textarea {{#if product.descriptionError}} class="red-border" {{/if}} id="description" name="description">{{product.description}}</textarea><br>
-    {{#if product.descriptionError}}
+        {{/if}}
+        <label for="description">Product Description</label><br>
+        <textarea {{#if product.descriptionError}} class="red-border" {{/if}} id="description"
+            name="description">{{product.description}}</textarea><br>
+        {{#if product.descriptionError}}
         <p class="errors">{{product.descriptionError}}</p>
-    {{/if}}    
-    <label for="bestSeller">BestSeller</label>
-    <input type="checkbox" id="bestSeller" name="bestSeller" {{#if product.bestSeller}} checked {{/if}}> <br>
+        {{/if}}
+        <label for="bestSeller">BestSeller</label>
+        <input type="checkbox" id="bestSeller" name="bestSeller" {{#if product.bestSeller}} checked {{/if}}> <br>
 
-    <label>Product Image Upload</label> <br>
-    <input type="file" name="productImg" id="productImg"> 
-    {{#if product.files}}
+        <label>Product Image Upload</label> <br>
+        <input type="file" name="productImg" id="productImg">
+        {{#if product.files}}
         <p class="errors">{{product.files}}</p>
-    {{/if}}
-    <br>
+        {{/if}}
+        <br>
 
-    <input type="submit" values="Update Product">
+        <input type="submit" values="Update Product">
 
-</form>
+    </form>
 
 </section>
