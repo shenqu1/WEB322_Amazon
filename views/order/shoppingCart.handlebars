@@ -33,6 +33,9 @@
 							</div>
 							<div class="col-md-4">
 								<h4><strong>Qty: {{this.quantity}}</strong></h4>
+								{{#if this.errorMessage}}
+								<span class="errors">{{this.errorMessage}}</span>
+								{{/if}}
 							</div>
 							<div class="col-md-2">
 								<button type="submit" class="btn btn-link btn-xs">
@@ -48,14 +51,14 @@
 					
 				</div>
 				<div class="panel-footer">
-					<div class="row text-center">
+					<form class="row text-center" method="POST" action="/order/checkOut?method=DELETE">
 						<div class="col-md-12">
 							<h4 class="text-right">Total <strong>${{total}}</strong></h4>
-							<button type="button" class="btn btn-success btn-block">
+							<button type="submit" class="btn btn-success btn-block">
 								Checkout
 							</button>
 						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
