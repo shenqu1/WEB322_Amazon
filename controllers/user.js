@@ -149,8 +149,10 @@ router.put("/profile/update/:id", (req,res)=>{
             userImg: req.files.userImg.name
         })
         .then(()=>{
+            req.session.userInfo.userImg = req.files.userImg.name;
             res.redirect("/user/profile");
         })
+        .catch(err=>console.log(`${err}`));
     })
     .catch(err=>console.log(`${err}`));
 } else {

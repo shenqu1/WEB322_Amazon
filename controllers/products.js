@@ -664,7 +664,7 @@ router.get("/productDescription/:id", (req, res) => {
             description: pro.description,
             inventory: pro.inventory,
             description: pro.description
-        }
+        };
         if(product.inventory > 0) {
             product.stock = "In Stock";
             product.avalible = "inStock";
@@ -680,16 +680,6 @@ router.get("/productDescription/:id", (req, res) => {
     })
     .catch(err => console.log(`Error occoured when pulling from the database ${err}`));
     
-});
-
-
-
-
-
-router.get("/shoppingCart", (req, res) => {
-    res.render("products/shoppingCart", {
-        title: `Shopping Cart`
-    });
 });
 
 router.post("/custSearch", (req, res) => {

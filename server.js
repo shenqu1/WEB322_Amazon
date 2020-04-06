@@ -10,6 +10,7 @@ require('dotenv').config({path:"./config/keys.env"});
 
 const productController = require("./controllers/products");
 const userController = require("./controllers/user");
+const orderController = require("./controllers/order");
 
 const app = express();
 
@@ -48,6 +49,10 @@ app.use((req,res,next)=>{
 
 app.use("/", productController);
 app.use("/user", userController);
+app.use("/order", orderController);
+app.use("/", (req,res)=>{
+    res.render("general/404");
+});
 
 mongoose.connect(process.env.MONGO_DB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(()=>{

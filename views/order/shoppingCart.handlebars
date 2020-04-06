@@ -1,0 +1,63 @@
+<div class="container shopping-cart">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<div class="panel-title">
+						<div class="row">
+							<div class="col-md-6">
+								<h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
+							</div>
+							<div class="col-md-6">
+								<a href="/products"><button type="button" class="btn btn-primary btn-sm btn-block">
+									<span class="glyphicon glyphicon-share-alt"></span> Continue shopping
+								</button></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body">
+					{{#if isEmpty}}
+					<h1>Your shopping Cart is Empty!</h1>
+					{{else}}
+					{{#each orders}}
+					<form class="row" method="POST" action="/order/order/delete/{{this.id}}?method=DELETE">
+						<div class="col-md-2"><img class="img-responsive" src="/uploads/{{this.productImg}}">
+						</div>
+						<div class="col-md-5">
+							<h4 class="product-name"><strong>{{this.productName}}</strong></h4><h4><small>{{this.description}}</small></h4>
+						</div>
+						<div class="col-md-5">
+							<div class="col-md-6 text-right">
+								<h4><strong>{{this.price}} <span class="text-muted">x</span></strong></h4>
+							</div>
+							<div class="col-md-4">
+								<h4><strong>Qty: {{this.quantity}}</strong></h4>
+							</div>
+							<div class="col-md-2">
+								<button type="submit" class="btn btn-link btn-xs">
+									<span class="glyphicon glyphicon-trash"> </span>
+								</button>
+							</div>
+						</div>
+					</form>
+					<hr>
+					{{/each}}
+					{{/if}}
+					<hr>
+					
+				</div>
+				<div class="panel-footer">
+					<div class="row text-center">
+						<div class="col-md-12">
+							<h4 class="text-right">Total <strong>${{total}}</strong></h4>
+							<button type="button" class="btn btn-success btn-block">
+								Checkout
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

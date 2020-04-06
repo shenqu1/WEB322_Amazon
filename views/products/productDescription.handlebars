@@ -1,32 +1,38 @@
 <div class="container">
-        	<div class="row">
-               <div class="col-xs-6 item-photo">
-                    <img style="max-width:100%;" src="/uploads/{{product.productImg}}" alt={{product.title}}/>
+    <div class="row">
+        <div class="col-xs-6 item-photo">
+            <img style="max-width:100%;" src="/uploads/{{product.productImg}}" alt={{product.title}} />
+        </div>
+        <div class="col-xs-6" style="border:0px solid gray">
+
+            <h3>{{product.title}}</h3>
+            <h4 style="color:#337ab7">Description:</h4>
+            <p>{{product.description}}</p>
+
+
+            <h4 style="color:#337ab7">Price:</h4>
+            <h3 style="margin-top:0px;">${{product.price}}</h3>
+            <form method="POST" action="/order/addToCart/{{product.id}}">
+                <div class="section">
+                    <h4 style="color:#337ab7">Quantitly:</h4>
+
+                    <input type="number" name="quantity" min="1" value="1">
+                    {{#if product.error}}
+                    <br>
+                    <span class="errors">{{product.error}}</span>
+                    {{/if}}
+                    {{#if product.stock}}
+                    <div class={{product.avalible}}>{{product.stock}}</div>
+                    {{/if}}
                 </div>
-                <div class="col-xs-6" style="border:0px solid gray">
 
-                    <h3>{{product.title}}</h3>    
-                    <h4 style="color:#337ab7">Description:</h4>
-                    <p>{{product.description}}</p>
-        
+                <div class="section add-to-cart">
+                    <button class="btn btn-success"><span style="margin-right:20px"
+                            class="glyphicon glyphicon-shopping-cart" aria-hidden="true" type="submit"></span> Add to
+                        Cart</button>
+                </div>
 
-                    <h4 style="color:#337ab7">Price:</h4>
-                    <h3 style="margin-top:0px;">${{product.price}}</h3>
-                    <form method="POST" action="/shoppingCart">
-                    <div class="section" >
-                        <h4 style="color:#337ab7">Quantitly:</h4>                   
-                        <div>
-                            <div class="btn-minus"><span class="glyphicon glyphicon-minus"></span></div>
-                            <input value="1" />
-                            <div class="btn-plus"><span class="glyphicon glyphicon-plus"></span></div>
-                        </div>
-                        <div class={{product.avalible}}>{{product.stock}}</div>
-                    </div>                
-        
-                    <div class="section add-to-cart" >
-                        <button class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true" type="submit"></span> Add to Cart</button>
-                    </div>    
-                    </form>                                    
-                </div>   
-            </div>
+            </form>
+        </div>
+    </div>
 </div>
