@@ -9,7 +9,7 @@ const dashBoardLoader = require("../middleware/authorization");
 
 router.get("/registration", (req, res) => {
 
-    res.render("user/registration", {
+    res.render("User/registration", {
         title: "Registration"
     });
 
@@ -77,7 +77,7 @@ router.post("/registration", (req, res) => {
             }
 
             if (errors.display) {
-                res.render("user/registration", errors);
+                res.render("User/registration", errors);
             } else {
                 const newUser = {
                     name: req.body["reg-name"].trim(),
@@ -122,7 +122,7 @@ router.get("/dashboard/:id", (req, res) => {
             const {
                 name
             } = user;
-            res.render("user/dashboard", {
+            res.render("User/dashboard", {
                 title: "user Dashboard",
                 name
             });
@@ -143,7 +143,7 @@ router.put("/profile/update/:id", isAuthenticated, (req, res) => {
                     userImg
                 } = user;
                 if (req.session.userInfo.type == "Admin") {
-                    res.render("user/clerkDashboard", {
+                    res.render("User/clerkDashboard", {
                         title: "Clerk Dashboard",
                         _id,
                         name,
@@ -151,7 +151,7 @@ router.put("/profile/update/:id", isAuthenticated, (req, res) => {
                         error: "! Only image file type allowed"
                     });
                 } else {
-                    res.render("user/userDashboard", {
+                    res.render("User/userDashboard", {
                         title: "User Dashboard",
                         _id,
                         name,
@@ -185,7 +185,7 @@ router.put("/profile/update/:id", isAuthenticated, (req, res) => {
 
 
 router.get("/login", (req, res) => {
-    res.render("user/login", {
+    res.render("User/login", {
         title: `Login Page`
     });
 });
@@ -205,7 +205,7 @@ router.post("/login", (req, res) => {
 
             if (!user) {
                 errors.email = "! Incorrect email";
-                res.render("user/login", errors);
+                res.render("User/login", errors);
             } else {
 
                 bcrypt.compare(errors.passwordValue, user.password)
@@ -216,7 +216,7 @@ router.post("/login", (req, res) => {
                             res.redirect("/user/profile");
                         } else {
                             errors.password = "! Incorrect password";
-                            res.render("user/login", errors);
+                            res.render("User/login", errors);
                         }
                     })
 
