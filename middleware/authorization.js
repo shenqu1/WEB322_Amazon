@@ -1,10 +1,10 @@
 const dashBoardLoader = (req, res) => {
     if (req.session.userInfo.type == "Admin") {
-        res.render("user/clerkDashboard", {
+        res.render("User/clerkDashboard", {
             title: "Clerk Profile"
         });
     } else {
-        res.render("user/userDashboard", {
+        res.render("User/userDashboard", {
             title: "User Profile"
         });
     }
