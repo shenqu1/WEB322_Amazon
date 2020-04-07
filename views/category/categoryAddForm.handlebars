@@ -1,7 +1,7 @@
 <section class="infoForm">
     <h1> Add Category</h1>
 
-    <form class="reg-form" method="POST" action="/product/addCategory" enctype="multipart/form-data">
+    <form class="reg-form" method="POST" action="/category/addCategory" enctype="multipart/form-data">
         <label for="category">Category</label> <br>
         <input type="text" {{#if this.category}} class="red-border" {{/if}} {{#if this.categoryValue}}
             value="{{this.categoryValue}}" {{/if}} name="category" id="category"> <br>

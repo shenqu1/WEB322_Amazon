@@ -12,7 +12,7 @@
         <input class="product-search-button" type="submit" value="Search">
     </form>
     <div class="product-links-holder">
-        <a href="/product/addCategory">Add a Category</a><br><br>
+        <a href="/category/addCategory">Add a Category</a><br><br>
         <a href="/product/add">Add a product</a>
     </div>
     <div class="cat-pro-list">
@@ -23,8 +23,8 @@
                 <img src="/uploads/{{this.categoryImg}}" alt={{this.category}}>
                 <p>
                     Category: {{this.category}}<br>
-                    <a href="/category/edit/{{this.id}}">Edit</a>
-                    <a href="/category/delete/{{this.id}}?method=DELETE" class="delete-button">Delete</a>
+                    <a href="/category/category/edit/{{this.id}}">Edit</a>
+                    <a href="/category/category/delete/{{this.id}}?method=DELETE" class="delete-button">Delete</a>
                 </p>
 
             </div>

@@ -1,7 +1,7 @@
 <section class="infoForm">
     <h1> Edit Category</h1>
 
-    <form class="reg-form" method="POST" action="/category/update/{{category.id}}?method=PUT"
+    <form class="reg-form" method="POST" action="/category/category/update/{{category.id}}?method=PUT"
         enctype="multipart/form-data">
         <label for="category">Category</label> <br>
         <input type="text" {{#if category.error}} class="red-border" {{/if}} name="category" id="category"

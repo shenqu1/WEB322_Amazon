@@ -9,6 +9,7 @@ const session = require('express-session');
 require('dotenv').config({path:"./config/keys.env"});
 
 const productController = require("./controllers/products");
+const categoryController = require("./controllers/category");
 const userController = require("./controllers/user");
 const orderController = require("./controllers/order");
 
@@ -48,6 +49,7 @@ app.use((req,res,next)=>{
 });
 
 app.use("/", productController);
+app.use("/category", categoryController);
 app.use("/user", userController);
 app.use("/order", orderController);
 app.use("/", (req,res)=>{
