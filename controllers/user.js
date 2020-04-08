@@ -5,9 +5,10 @@ const path = require("path");
 const bcrypt = require('bcryptjs');
 const isAuthenticated = require("../middleware/authentication");
 const dashBoardLoader = require("../middleware/authorization");
+const isVisitor = require("../middleware/visitor");
 
 
-router.get("/registration", (req, res) => {
+router.get("/registration", isVisitor, (req, res) => {
 
     res.render("User/registration", {
         title: "Registration"
@@ -184,7 +185,7 @@ router.put("/profile/update/:id", isAuthenticated, (req, res) => {
 });
 
 
-router.get("/login", (req, res) => {
+router.get("/login", isVisitor, (req, res) => {
     res.render("User/login", {
         title: `Login Page`
     });
