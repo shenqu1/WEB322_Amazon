@@ -102,7 +102,7 @@ router.get("/shoppingCart", isAuthenticated, (req, res) => {
                 title: `Shopping Cart`,
                 orders: filterorders,
                 isEmpty: (filterorders.length > 0 ? false : true),
-                total: Math.floor((total + 0.005) * 100) / 100
+                total: Math.floor((total * 1.13 + 0.005) * 100) / 100
             });
         })
         .catch(err => console.log(`${err}`));
@@ -169,12 +169,12 @@ router.delete("/checkOut", isAuthenticated, (req, res) => {
                                 title: `Shopping Cart`,
                                 orders: filterorders,
                                 isEmpty: (filterorders.length > 0 ? false : true),
-                                total: Math.floor((total + 0.005) * 100) / 100
+                                total: Math.floor((total * 1.13 + 0.005) * 100) / 100
                             });
                         } else {
                             let record = "";
                             filterorders.forEach((order) => {
-                                record += `<img src="https://web322-amazon-project.herokuapp.com/uploads/${order.productImg}" alt="${order.productName}" width="100"><p>${order.productName}: $${order.price}*${order.quantity}</p><hr>`
+                                record += `<img src="https://web322-amazon-project.herokuapp.com/uploads/${order.productImg}" alt="${order.productName}" width="100"><p>${order.productName}: $${order.price} * ${order.quantity}</p><hr>`
                                 productsModel.updateOne({
                                         _id: order.productId
                                     }, {
@@ -187,7 +187,7 @@ router.delete("/checkOut", isAuthenticated, (req, res) => {
                                     userId: req.session.userInfo._id
                                 })
                                 .then(() => {
-                                    record += `<p>Total: $${Math.floor((total + 0.005) * 100) / 100}</p>`
+                                    record += `<p>Tax: 13%</p><p>Total: $${Math.floor((total * 1.13 + 0.005) * 100) / 100}</p>`
                                     const sgMail = require('@sendgrid/mail');
                                     sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
                                     const msg = {
