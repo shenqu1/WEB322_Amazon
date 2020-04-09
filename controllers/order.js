@@ -174,7 +174,7 @@ router.delete("/checkOut", isAuthenticated, (req, res) => {
                         } else {
                             let record = "";
                             filterorders.forEach((order) => {
-                                record += `<p>${order.productName}: $${order.price}*${order.quantity}</p><hr>`
+                                record += `<img src="https://web322-amazon-project.herokuapp.com/uploads/${order.productImg}" alt="${order.productName}" width="100"><p>${order.productName}: $${order.price}*${order.quantity}</p><hr>`
                                 productsModel.updateOne({
                                         _id: order.productId
                                     }, {
@@ -193,7 +193,7 @@ router.delete("/checkOut", isAuthenticated, (req, res) => {
                                     const msg = {
                                         to: `${req.session.userInfo.email}`,
                                         from: `squ7@myseneca.ca`,
-                                        subject: `Registration Form Submit`,
+                                        subject: `Your Order`,
                                         html: `<h1>Hi ${req.session.userInfo.name}!<br> Congratulations!</h1>
                                     <p> You have successfully puchased:</p>
                                     ${record}
