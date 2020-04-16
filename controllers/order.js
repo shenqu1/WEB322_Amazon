@@ -163,7 +163,7 @@ router.delete("/checkOut", isAuthenticated, (req, res) => {
                                     }
                                 }
                             }
-                        }
+                        } 
                         if (error) {
                             res.render("order/shoppingCart", {
                                 title: `Shopping Cart`,
@@ -195,7 +195,7 @@ router.delete("/checkOut", isAuthenticated, (req, res) => {
                                         from: `squ7@myseneca.ca`,
                                         subject: `Your Order`,
                                         html: `<h1>Hi ${req.session.userInfo.name}!<br> Congratulations!</h1>
-                                    <p> You have successfully puchased:</p>
+                                    <p> You have successfully purchased:</p>
                                     ${record}
                                     <p>Visit our website: <a href="https://web322-amazon-project.herokuapp.com/">https://web322-amazon-project.herokuapp.com/</a></p>`
                                     };
@@ -210,6 +210,8 @@ router.delete("/checkOut", isAuthenticated, (req, res) => {
                                 })
                                 .catch(err => console.log(`${err}`));
                         }
+                    } else {
+                        res.redirect("/order/shoppingCart");
                     }
 
                 })
