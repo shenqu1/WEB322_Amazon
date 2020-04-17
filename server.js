@@ -30,6 +30,11 @@ app.engine('handlebars', exphbs({
            if(user.type == "Admin") {
                return `<li><a href="/productDashboard">Products Board</a></li>`;
            }
+        },
+        isClerkFooter: function (user) {
+            if(user.type == "Admin") {
+                return `<li><a href="/productDashboard">Products Board</a>/</li>`;
+            }
         }
     }
 }));
