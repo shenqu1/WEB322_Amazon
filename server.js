@@ -25,6 +25,11 @@ app.engine('handlebars', exphbs({
     helpers:{
         matchSelect: function (a,b) {
             return a == b ? "selected" : "";
+        },
+        isClerk: function (user) {
+           if(user.type == "Admin") {
+               return `<li><a href="/productDashboard">Products Board</a></li>`;
+           }
         }
     }
 }));

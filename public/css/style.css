@@ -755,7 +755,7 @@ div.section>input {
     nav ul li {
         display: block;
         padding: 10px 10px;
-        font-size: 0.5rem;
+        font-size: 0.7rem;
     }
 
     .footer-top {
@@ -794,10 +794,6 @@ div.section>input {
 
     header {
         font-size: 0.7rem;
-    }
-
-    .responsive {
-        height: 200px;
     }
 
     .product-item-container {
